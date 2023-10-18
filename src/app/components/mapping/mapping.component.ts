@@ -9,6 +9,7 @@ import { Severity } from '../../Models/Enums/severity.enum';
 //import { LoadingBarService } from 'ngx-loading-bar';
 import { MessageService } from '../../Services/message-service';
 import { HeaderDto } from '../../Models/Dtos/header-dto';
+import { MapHeaderDto } from '../../Models/Dtos/map-header-dto';
 
 @Component({
   selector: 'app-mapping',
@@ -23,7 +24,7 @@ export class MappingComponent implements OnInit, AfterViewInit {
     private _messagingService : MessageService) { }
 
   //private _progressRef: NgProgressRef;
-  public Suggestions : ColMapDto[];
+  public Suggestions: MapHeaderDto[];
   public Headers : HeaderDto[];
   public Mappings : ColMapDto[];
   public SelectedAdd : string;
@@ -76,7 +77,7 @@ export class MappingComponent implements OnInit, AfterViewInit {
     {
       colMapResponse.suggestions.forEach(x=>
       {
-        x.displayField = x.column.header + " : " + x.selected.name;
+        x.displayField = x.header + " : " + x.selected.name;
         x.id = i;
         i++;
       });
