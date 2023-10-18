@@ -1,0 +1,26 @@
+<form>
+<table class="tblWidth">
+    <tr>
+    <th></th>
+    <th></th>
+    </tr>
+    <tr>
+    <td></td>
+    <td>
+
+      <ng-select class="selectStyle customMed"
+      #i
+      [items]="States"
+      class="stateWidth"
+      bindLabel="Name"
+      [(ngModel)]="Selected"
+      placeholder="Please select a State"
+      bindValue="StateId"
+      clearable="true"
+      name="stateLookup"
+      clearAllText="Clear">
+      </ng-select>
+      </td>
+      </tr>
+</table>
+</form>

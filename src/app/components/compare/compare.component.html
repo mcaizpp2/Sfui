@@ -1,0 +1,171 @@
+<div class="sectionHeader">
+   
+    <div class="sectionContent">
+        <div class="row tblMargin">
+            <div class="col-sm-12">
+                <span  class="errorMsg margLeftOne" *ngIf="Errors?.length > 0">The following errors Occured - </span>
+            </div>
+        </div>
+        <div class="row tblMargin" *ngFor="let err of Errors;">
+            <div class="col-sm-12">
+                <span class="errorMsgLight margLeftOne">{{err}}</span>
+            </div>
+        </div>
+
+ <form class="form-horizontal" [formGroup]="FileForm" >
+        <div class="row lnHeight tblMargin" >
+           
+                <div class="col-sm-2">
+                    <span>Cleaned File</span>
+                </div>
+                <div class="col-sm-2">
+                    <div class="dropzone" style="height: 80px im !important;">
+                        <div class="center">
+                            <ngx-file-drop dropZoneLabel="Please Drop a file" (onFileDrop)="Dropped($event)"  customstyle="filedrop">
+                                <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                    <div class="text-wrapper">
+                                        <div class="fileDropTxt">{{FilePath}}</div>
+                                    </div>
+                                </ng-template>
+                            </ngx-file-drop>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <span>Morph Account</span>
+                </div>
+                <div class="col-sm-2">
+                    <ng-select class="selectStyle customMed"
+                    [items]="ConversionFilesDto"
+                    bindLabel="accountName"
+                    placeholder="Please select a Account"
+                    bindValue="filePath"
+                    clearable="true"
+                    formControlName="FileOne"
+                    clearAllText="Clear">
+                    </ng-select>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn-sm btn-info btn-outline-rounded btnMarg" (click)="GetWorkSheets()" [disabled]="!FileForm.valid">Get WorkSheets</button>
+                </div>
+            
+        </div>
+</form>
+<form class="form-horizontal" [formGroup]="WorkSheetForm" >
+     <div class="row lnHeight tblMargin tblBot"> 
+        
+            <div class="col-sm-2">
+                Dropped Worksheets
+            </div>
+            <div class="col-sm-2">
+                <ng-select class="selectStyle customMed"
+                [items]="DroppedWorkSheets"
+                bindLabel="name"
+                placeholder="Please select a worksheet"
+                bindValue="name"
+                clearable="true"
+                formControlName="DroppedWs"
+                clearAllText="Clear">
+                </ng-select>
+            </div>
+            <div class="col-sm-2">
+                Processed Worksheets
+            </div>
+            <div class="col-sm-2">
+                <ng-select class="selectStyle customMed"
+                [items]="ProcessedWorkSheets"
+                bindLabel="name"
+                placeholder="Please select a worksheet"
+                bindValue="name"
+                clearable="true"
+                formControlName="ProcessedWs"
+                clearAllText="Clear">
+                </ng-select>
+            </div>
+        <div class="col-sm-1">
+            Start Idx
+        </div>
+        <div class="col-sm-1">
+            <input type="text" class="form-control txtSmall" name="start" formControlName="start" />
+        </div>
+        <div class="col-sm-2">
+            <button class="btn-sm btn-info btn-outline-rounded btnMarg" (click)="Compare()" [disabled]="!WorkSheetForm.valid">Compare Files</button>
+        </div>
+    
+    </div> 
+</form>
+    </div>
+
+
+    <!-- <div class="sectionContent sectionTop" *ngIf="ShowResults">
+        <div class="row tblMargin">
+            <div class="col-sm-2">
+                <span>Building Matches</span>
+            </div>
+            <div class="col-sm-1">
+                <span>{{BldgClassMatched}} / {{BldgClassNotMatched}}</span>
+            </div>
+            <div class="col-sm-2">
+                <span>Occupancy Matches</span>
+            </div>
+            <div class="col-sm-1">
+                <span>{{OccupancyMatched}} / {{OccupancyNotMatched}}</span>
+            </div>
+        </div>
+
+    </div> -->
+   
+        <div class="sectionContent sectionTop tblBot" *ngIf="ShowResults">
+            <div class="row tblMargin">
+                <div class="col-sm-1">
+                    <button class="btn btn-info btn-square btn-sm wdthLrg" (click)="Filter(1)" >Failed Building</button>
+             
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-info btn-square btn-sm wdthLrg" (click)="Filter(2)" >Failed Occupancy</button>
+             
+                </div> 
+                
+                <div class="col-sm-1">
+                    <button class="btn btn-info btn-square btn-sm wdthLrg" (click)="Filter(3)" >Reset Filters</button>
+                </div>
+
+                <div class="col-xs-2">
+                    <span class="weight algn">Building Matches</span>
+                </div>
+                <div class="col-xs-3">
+                    <span> 
+                        <span class="success algn">&nbsp;{{BldgClassMatched}}</span>
+                        <span class="weight algn"> / </span>
+                       <span class="fail algn"> {{BldgClassNotMatched}}</span>
+                    </span>
+                </div>
+                <div class="col-xs-2 tblLeft">
+                    <span class="weight algn">Occupancy Matches</span>
+                </div>
+                <div class="col-xs-3">
+                    <span>
+                        <span class="success algn">&nbsp;{{OccupancyMatched}}</span> 
+                        <span class="weight algn"> / </span> 
+                        <span class="fail algn"> {{OccupancyNotMatched}}</span>
+                    </span>
+                </div>
+             
+            </div>
+         
+            <div class="row tblMargin tblBot">
+                <div class="col-sm-12">
+                <ag-grid-angular
+                    style="width: 1268px; height: 356px;"
+                    class="ag-theme-balham marg"
+                    [rowData]="CompareResults"
+                    [columnDefs]="ColumnDefs"
+                    [gridOptions]="Options"
+                    [rowSelection]="RowSelection">
+                </ag-grid-angular>
+                </div>
+            </div>
+    </div>
+
+</div>

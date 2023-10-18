@@ -1,0 +1,14 @@
+.bg
+{
+background: linear-gradient(to bottom, #1b1b1b 0%, #151515 100%);
+
+}
+
+.fnt
+{
+    font-weight:bold;
+    font-size:14px;
+    color:#fed136;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+

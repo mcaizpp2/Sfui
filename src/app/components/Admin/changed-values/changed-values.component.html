@@ -1,0 +1,233 @@
+<ng-template #confirmSprinklerTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Delete Sprinkler Value</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+
+        <div class="row padTxtTop">
+            <div class="col-sm-12">
+              Are you sure you wish to delete the Sprinkler Value?
+            </div>
+        </div>
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info"  (click)="ConfirmSprinkler()"> Confirm </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+</ng-template>
+
+<ng-template #confirmSprinklerCommitTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Commit Sprinkler Value</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="row padTxtTop">
+            <div class="col-sm-12">
+              Are you sure you wish to commit the Sprinkler Value?
+            </div>
+        </div>
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info"  (click)="SprinklerCommit()">Commit</button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+</ng-template>
+
+<ng-template #confirmValuesTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Delete {{ValueType['value']}} Value</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="row padTxtTop">
+            <div class="col-sm-12">
+              Are you sure you wish to delete the {{ValueType}} Value?
+            </div>
+        </div>
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info"  (click)="ConfirmValues()"> Confirm </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+</ng-template>
+
+<ng-template #confirmValuesCommitTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Commit {{ValueType['value']}} Value</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="row padTxtTop">
+            <div class="col-sm-12">
+              Are you sure you wish to commit the {{ValueType}} Value?
+            </div>
+        </div>
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info"  (click)="CommitValues()"> Commit </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+</ng-template>
+
+<ng-template #sprinklerTemplate let-modal>
+    <div class="modal-header bg-dark">
+        <h4 class="modal-title modalTitle" id="modal-basic-title">Sprinkler Update</h4>
+        <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-1">
+                Text
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" [(ngModel)]="SelectedSprinkler.text" />
+            </div>
+            <div class="col-sm-1">
+                Type
+            </div>
+            <div class="col-sm-4 cmbSize">
+              <ng-select class="selectStyle cmbSize"
+              [items]="SprinklerTypes"
+              class="cmbWidth"
+              bindLabel="text"
+              [(ngModel)]="SelectedSprinkler.sprinklerValue.sprinklerId"
+              placeholder="Please select a Sprinkler Type"
+              bindValue="id"
+              clearable="true"
+              name="sprinklerTypeLookup"
+              clearAllText="Clear">
+              </ng-select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn btn-info btn-sm" (click)="UpdateSprinklerRecord()">Update</button>
+    
+        <button type="button" class="btn btn btn-info btn-sm" (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #valueTemplate let-modal>
+    <div class="modal-header bg-dark">
+        <h4 class="modal-title modalTitle" id="modal-basic-title">Values Update</h4>
+        <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-1">
+                Value
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" [(ngModel)]="SelectedValue.originalValue" />
+            </div>
+            <div class="col-sm-2">
+                Replace With
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" [(ngModel)]="SelectedValue.replacementValue" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn btn-info btn-sm" (click)="UpdateValueRecord()">Update</button>
+    
+        <button type="button" class="btn btn btn-info btn-sm" (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>
+
+<div class="sectionHeader">
+    <div class="sectionContent sectionTop">
+        <nav class="navLeft">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="active nav-link active" id="sprinkler-tab" data-toggle="tab" href="#sprinkler">Sprinkler</button>
+            <button class="nav-link" id="state-tab" data-toggle="tab" href="#state">State</button>
+            <button class="nav-link" id="street-tab" data-toggle="tab" href="#street">Street</button>
+          
+             </div>
+        </nav>
+        <div class="tab-content clearfix">
+            <div class="tab-pane active" id="sprinkler">
+                <div class="row lnHeight tblMargin margBtm">
+                    <ag-grid-angular
+                        style="width: 692px;"
+                        class="ag-theme-balham marg"
+                        [rowData]="SprinklerValues"
+                        [columnDefs]="SprinklerColumnDefs"
+                        [gridOptions]="SprinklerOptions"
+                        (gridReady)="onSprinklerGridReady($event)"              
+                        [rowSelection]="RowSelection">
+                    </ag-grid-angular>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="state" >
+                <div class="row lnHeight tblMargin margBtm">
+                <ag-grid-angular
+                    style="width: 832px;height:500px"
+                    class="ag-theme-balham marg"
+                    [rowData]="StateValues"
+                    [columnDefs]="StateColumnDefs" 
+                    [gridOptions]="StateOptions"
+                    (gridReady)="onStateGridReady($event)"              
+                    [rowSelection]="RowSelection">
+                </ag-grid-angular>
+            </div>
+            </div>
+            <div class="tab-pane" id="street" >
+            <div class="row lnHeight tblMargin margBtm">
+            <ag-grid-angular
+                style="width: 832px;height:500px"
+                class="ag-theme-balham marg"
+                [rowData]="StreetValues"
+                [columnDefs]="StreetColumnDefs"
+                [gridOptions]="StreetOptions"
+                (gridReady)="onStreetGridReady($event)"               
+                [rowSelection]="RowSelection">
+            </ag-grid-angular>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>

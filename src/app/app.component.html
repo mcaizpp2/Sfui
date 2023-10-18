@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Security-Policy" content="default-src *;style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+
+  <title>MorphUi</title>
+  <!-- <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+  <!-- Bootstrap Js CDN -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
+  <script src="https://npmcdn.com/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+  <script src="https://npmcdn.com/angular2@2.0.0-beta.17/es6/dev/src/testing/shims_for_IE.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+</head>
+
+<div class="wrapper">
+  <div id="content" class="content">
+
+    <div class="container-fluid">
+     
+
+      <app-top></app-top>
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

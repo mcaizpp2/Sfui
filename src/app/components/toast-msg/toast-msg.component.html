@@ -1,0 +1,32 @@
+<div class="row" class="toContainer">
+    <div class="col-sm-9 size" >
+      <div *ngIf="title" 
+        [class]="options.titleClass" 
+        [attr.aria-label]="title"
+       > {{ title }}
+      </div>
+    
+        <div id="left" class="col-sm-6 size">
+          <div *ngIf="message && options.enableHtml" role="alert" aria-live="polite"
+        class="custom-message"
+        [class]="options.messageClass" [innerHTML]="message">
+      </div>
+      <div *ngIf="message && !options.enableHtml" role="alert" aria-live="polite"
+        class="custom-message"
+        [class]="options.messageClass"  [attr.aria-label]="message">
+        {{ message }}
+      </div>
+        </div>
+
+
+    </div>
+  <!--  <div class="col-9 text-right">
+       <a *ngIf="!options.closeButton" class="btn btn-pink btn-sm" (click)="action($event)">
+        {{ undoString }}
+      </a> 
+      <a *ngIf="options.closeButton" (click)="remove()" class="btn btn-sm toast-close-button">
+        &times;
+      </a>
+    </div>-->
+  </div>
+  

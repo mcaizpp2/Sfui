@@ -1,0 +1,60 @@
+
+
+.faWarning
+{
+    font-size:18px;
+    color: #fed136;
+    text-align: center;
+}
+
+.faError
+{
+    font-size:18px;
+    color: red;
+    text-align: center;
+}
+
+.trLineHeightSml
+{
+    line-height: 14px !important;
+}
+
+.mrgBtm
+{
+    margin-bottom : 0rem !important;
+}
+
+.txtAlign
+{
+    text-align: center;
+}
+
+.fntBld{
+    font-weight:bold;
+}
+
+.noBck
+{
+    background-color:#FFFFFF !important;
+    border-bottom-color: transparent;
+}
+
+.noBrdRight
+{
+    border-right-color: transparent;
+}
+
+.fntSize
+{
+    font-size:12px;
+}
+
+.fntSizeSm
+{
+    font-size:10px !important;
+}
+
+.ng-select.ng-select-single .ng-select-container 
+{
+  height: 34px !important;
+}

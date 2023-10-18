@@ -1,0 +1,182 @@
+<div class="sectionHeader">
+   
+    <div class="sectionContent">
+        <form name="addForm">
+        <div class="row lnHeight tblMargin">
+            <div class="col-sm-2">
+                <ng-select class="selectStyle customMed"
+                [items]="Headers"
+                placeholder="Please select an Xl Col"
+                clearable="true"
+                name="cmbAdd"
+                bindLabel="header"
+                bindValue="header"
+                [(ngModel)]="SelectedAdd"
+                clearAllText="Clear">
+                </ng-select>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn-sm btn-info btn-outline-rounded  btnMarg" [disabled]="!SelectedAdd" (click)="AddColumn()" >Add Column</button>
+            </div>
+
+            <!--<div class="col-sm-1"><label>Suggestions</label></div>-->
+
+            <div class="col-sm-2">
+                <ng-select class="selectStyle customMed"
+                [items]="Suggestions"
+                placeholder="Please select a Suggestion"
+                clearable="true"
+                bindLabel="displayField"
+                bindValue="id"
+                [(ngModel)]="SelectedSuggestion"
+                name="cmbSuggestions"
+                clearAllText="Clear">
+                </ng-select>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn-sm btn-info btn-outline-rounded  btnMarg" [disabled]="!SelectedSuggestion"  (click)="AddSuggestion()" >Add Suggestion</button>
+            </div>
+            <div class="col-sm-1 chkMarg">
+                <div class="checkbox chk">
+                    <!--<input type="checkbox" id="c2" name="cb2" [(ngModel)]="GeoCode">
+                    <label for="c2">GeoCode</label>
+                    -->
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn-sm btn-info btn-outline-rounded btnMarg" [disabled]="MapDisabled" (click)="SaveFields()">Map Fields > Locations</button>
+            </div>
+            <div class="col-sm-2" style="display: flex; justify-content: space-between;" >
+                <p class="smlTxt">{{ValTxt}}
+                
+                <button type="button" class="btn btn-info btn-xs fa fa-arrow-down" *ngIf="!IsCollapsed" (click)="IsCollapsed = !IsCollapsed"></button> 
+                <button type="button" class="btn btn-info  btn-xs fa fa-arrow-up" *ngIf="IsCollapsed" (click)="IsCollapsed = !IsCollapsed"></button> 
+        
+                </p>
+            </div>
+        </div>
+
+        
+        </form>
+    </div>
+    <div class="sectionContent sectionTop" [ngbCollapse]="IsCollapsed">
+            <div class="col-sm-8">
+                <table class="table table-striped tblMargin">
+                    <thead>
+                        <tr>
+                          <th class="customth">Validation</th>
+                          <th class="customth">Field</th>
+
+                          <th class="customth">Validation</th>
+                          <th class="customth">Field</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let matrix of Validations | toMatrix:2;let i - index">
+                            <tr class="trLineHeightSml">
+                                <td class="td mrgBtm">
+                                    <div *ngIf="matrix[0]" class="mrgBtm">
+                                        <i *ngIf="EnumType(matrix[0].warningType) == 2" class="fa fa-exclamation-triangle faWarning mrgBtm"></i> 
+                                        <i *ngIf="EnumType(matrix[0].warningType) == 1" class="fa fa-exclamation-triangle faError mrgBtm"></i> 
+                                        
+                                        {{matrix[0].valText}}
+                                    </div>
+                                </td>
+                                <td class="td mrgBtm"> 
+                                 {{matrix[0].field.name }}
+                                </td>
+                      
+
+                                <td class="td">
+                                    <p *ngIf="matrix[1]">
+                                        <i *ngIf="EnumType(matrix[1].warningType) == 2" class="fa fa-exclamation-triangle faWarning"></i> 
+                                        <i *ngIf="EnumType(matrix[1].warningType) == 1" class="fa fa-exclamation-triangle faError"></i> 
+                                        
+                                        {{matrix[1].valText }}
+                                        </p>
+                                </td>
+                                <td class="td">
+                                   <p *ngIf="matrix[1]">
+                                    {{matrix[1].field.name }}
+                                   </p>
+                                </td>
+                              
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <div class="sectionContent sectionTop">
+
+        <div class="col-sm-12">
+            <form> 
+                <div style="overflow:scroll;width:100%;overflow:auto">
+                    <table class="table tblMargin">
+                        <thead>
+                            <tr>
+                                <th class="customth mapHead fnt thBrd">Excel Address</th>
+                                <ng-container *ngFor=" let mapping of MappingHeaders;let i - index">
+                                <th class="customth colStyleCnt thBrd">{{mapping.header.address}}</th>
+                                </ng-container>
+                            </tr>
+                            <tr>
+                                <th class="customth mapHead fnt thBrd">Excel Column</th>
+                               
+                                <ng-container *ngFor=" let mapping of MappingHeaders;let i - index">
+                                <th class="customth colStyle fnt thBrd">{{mapping.header.header}}</th>
+                                </ng-container>
+                            </tr>
+                           
+
+                            <tr>
+                                <th class="customth mapHead fnt thBrd">Map To</th>
+                                <ng-container *ngFor=" let mapping of MappingHeaders;let i - index">
+                                <th class="customth colStyle thBrd">
+                                    <ng-select class="selectStyle customMed fntSizeSm noDisplay"
+                                    [items]="mapping.fields"
+                                    placeholder="Please select a column"
+                                    clearable="true"
+                                    bindLabel="name"
+                                    bindValue="fieldId"
+                                    name="{{mapping.colIdx}}"
+                                    [(ngModel)]="mapping.selected.fieldId"
+                                    (change)="OnChange()"
+                                    clearAllText="Clear">
+                                    </ng-select>
+                                </th>
+                                </ng-container>
+                            </tr>
+
+                            <tr>
+                                <th class="customth thBrd"></th>
+                                <ng-container *ngFor=" let mapping of MappingHeaders;let i - index">
+                                <th class="customth colStyle thBrd">
+                                    <app-numeric-ctrl [Mapping]="mapping" (valueChange)='changeNumeric($event)'></app-numeric-ctrl>
+                                </th>
+                                </ng-container>
+                            </tr>
+                        </thead>
+                            
+                        <tbody>
+                            <ng-container *ngFor=" let sample of SampleData;let i - index">
+                                <tr class="tdRow">
+                                    <td class="td colStyle"></td>
+                                    <ng-container *ngFor=" let col of sample;let j - index">
+                                    <td class="td colStyle">
+                                        {{ col }}
+                                    </td>
+                                    </ng-container>
+                                </tr>
+                            </ng-container>
+            
+                    
+                    
+                        </tbody>
+                    </table>
+                </div>
+        </form>
+        </div>
+    </div>
+
+</div>

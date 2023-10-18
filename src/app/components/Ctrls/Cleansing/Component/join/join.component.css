@@ -1,0 +1,16 @@
+.lbl
+{
+  font-weight:bold;
+  font-size:11px;
+}
+
+.padTxtTop
+{
+  padding-top:8px;
+}
+
+.crossBtn
+{
+  padding: 0rem 0.4rem !important;
+  margin-top:6px;
+}

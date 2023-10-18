@@ -1,0 +1,182 @@
+
+.colStyle
+{
+    min-width:160px;
+    font-size:12px;
+    text-align: center;
+}
+
+.noDisplay
+{
+    display: inherit;
+    width:160px;
+    text-align: center;
+}
+.thBrd
+{
+    border-bottom: 1px solid #dee;
+    border-right: 1px solid #dee;
+}
+
+.padUp
+{
+    margin-left:60px !important;
+}
+
+.padDown
+{
+    margin-right:6px !important;
+}
+
+.fnt
+{
+    font-size:12px !important;
+}
+
+.colStyleCnt
+{
+    min-width:160px;
+    color: #fed136;
+    text-align: center;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.mapHead
+{
+    color: #fed136;
+    text-align: center;
+    font-size:10px;
+    width:60px;
+}
+.faWarning
+{
+    font-size:18px;
+    color: #fed136;
+    text-align: center;
+}
+
+.faError
+{
+    font-size:18px;
+    color: red;
+    text-align: center;
+}
+
+.trLineHeightSml
+{
+    line-height: 14px !important;
+}
+
+.mrgBtm
+{
+    margin-bottom : 0rem !important;
+}
+
+.txtAlign
+{
+    text-align: center;
+}
+
+.fntBld{
+    font-weight:bold;
+}
+
+.noBck
+{
+    background-color:#FFFFFF !important;
+    border-bottom-color: transparent;
+}
+
+.noBrdRight
+{
+    border-right-color: transparent;
+}
+
+.fntSize
+{
+    font-size:12px;
+}
+
+.fntSizeSm
+{
+    font-size:10px !important;
+}
+
+.ng-select.ng-select-single .ng-select-container 
+{
+  height: 34px !important;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: 20px !important;
+}
+
+
+.chk{
+    line-height: 0px;
+    margin:2px;
+}
+.lblMargin
+{
+    padding-top:6px;
+}
+
+.checkbox label::before,
+.checkbox label::after {
+    position: absolute;
+    content: "";
+    
+    /*Needed for the line-height to take effect*/
+    display: inline-block;
+}
+
+/*Outer box of the fake checkbox*/
+.checkbox label::before{
+    height: 16px;
+    width: 16px;
+    
+    border: 1px solid;
+    left: 0px;
+    
+    /*(24px line-height - 16px height of fake checkbox) / 2 - 1px for the border
+     *to vertically center it.
+     */
+    top: 3px;
+}
+
+.chkMarg
+{
+    margin-top:10px;
+    margin-left:20px;
+}
+
+/*Checkmark of the fake checkbox*/
+.checkbox label::after {
+    height: 5px;
+    width: 9px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    
+    transform: rotate(-45deg);
+    
+    left: 4px;
+    top: 7px;
+}
+
+
+.checkbox input[type="checkbox"] {
+    opacity: 0;
+}
+
+
+/*Hide the checkmark by default*/
+.checkbox input[type="checkbox"] + label::after {
+    content: none;
+}
+
+/*Unhide on the checked state*/
+.checkbox input[type="checkbox"]:checked + label::after {
+    content: "";
+}
+

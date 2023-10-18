@@ -1,0 +1,184 @@
+<div class="col-md-12">
+    <div class="card cardCust">
+<div class="sectionHeader">
+  <div class="card-body">
+ <form class="form-horizontal" [formGroup]="ImportForm" >
+    <div class="sectionContent">
+        <div class="row tblMargin" >
+            <div class="col-sm-12">
+                <span  class="errorHdrMsg margLeftOne" *ngIf="Errors?.length > 0">The following errors occured - </span>
+            </div>
+        </div>
+        <div class="row tblMargin" *ngFor="let err of Errors;">
+            <div class="col-sm-12">
+                <span class="errorMsg margLeftOne">{{err}}</span>
+            </div>
+        </div>
+
+        <div class="row lnHeight tblMargin">
+            <div class="col-1 rwLeft"></div>
+            <div class="col-sm-3" *ngIf="!IsEdit">
+
+                <input (change)="this.onFilechange($event)" class="form-control" type="file" id="formFile" style="border : none !important">
+               
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="row lnHeight tblMargin" >
+            <div class="col-1 rwLeft" >
+                <!--<div class="dropzone" >
+                    <div class="center">
+                            <ngx-file-drop dropZoneLabel="Please Drop files here" (onFileDrop)="dropped($event)"  customstyle="filedrop">
+                                <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                    <div class="text-wrapper">
+                                        <div class="fileDropTxt">{{FilePath}}</div>
+                                    </div>
+                                </ng-template>
+                            </ngx-file-drop>
+                    </div>
+                </div>-->
+               </div>
+
+
+            <div class="col-lg-1">
+                <label>Name <span class="man">*</span></label>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control txtSmall dtTxt" name="account" formControlName="Name"  />
+            </div>
+    
+            <div class="col-lg-1 cmbMarg">
+                <label class="lblWidth">WorkSheet <span class="man">*</span></label>
+            </div>
+            <div class="col-xs-3 cmbMarg">
+                <ng-select class="selectStyle cmbSize"
+                [items]="WorkSheets"
+                bindLabel="Name"
+                placeholder="Please select a WorkSheet"
+                bindValue="Name"
+                clearable="true"
+                formControlName="WorkSheet"
+                clearAllText="Clear">
+                </ng-select>
+    
+            </div>
+    
+            <div class="col-1 rwLeft" *ngIf="IsEdit"></div>
+            <div class="col-lg-1 cmbMarg">
+
+                <label>Currency <span class="man">*</span></label>
+            </div>
+            <div class="col-xs-3 cmbMarg">
+                <ng-select class="selectStyle cmbSize"
+                [items]="Currencies"
+                bindLabel="name"
+                placeholder="Please select a Currency"
+                bindValue="currencyId"
+                formControlName="Currency"
+                clearable="true"
+                clearAllText="Clear">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="row lnHeight tblMargin" >
+            <div class="col-1 rwLeft"> </div>
+            <div class="col-sm-1">
+                <label>Acc Num <span class="man">*</span></label>
+            </div>
+            <div class="col-sm-2"> 
+                <input type="text" class="form-control txtSmall dtTxt" name="num" formControlName="Num"  />
+            </div>
+
+            <div class="col-lg-1 cmbMarg">
+                <label>Inception</label>
+            </div>
+            <div class="col-xs-3 cmbMarg">
+                <input type="text" class="form-control dtTxt" 
+                placeholder="31/12/9999" ngbDatepicker #d="ngbDatepicker" 
+                dateFormat="dd/mm/yyyy" formControlName="Inception" (focus)="d.open()"/>
+            </div>
+
+            <div class="col-lg-1 cmbMarg">
+                <label>Expiry</label>
+            </div>
+            <div class="col-xs-3 cmbMarg">
+                <input type="text" class="form-control dtTxt" placeholder="31/12/9999" ngbDatepicker #e="ngbDatepicker" formControlName="Expiry" dateFormat="dd/mm/yyyy" (focus)="e.open()"/>
+            </div>
+        </div>
+
+        <div class="row lnHeight tblMargin">
+            <div class="col-1 rwLeft"></div>
+            <div class="col-sm-1">
+                <label>Total TIV <span class="man">*</span></label>
+            </div>
+            <div class="col-sm-2"> 
+                <input type="text" class="form-control txtSmall dtTxt" name="tiv" formControlName="Tiv"  />
+            </div>
+          
+            <div class="col-lg-1 cmbMarg">UserText 1</div>
+            <div class="col-xs-3 cmbMarg">
+                <input type="text" class="form-control txtSmall dtTxt" name="usrTxt1" formControlName="UsrTxt1"  />
+            </div>
+
+            <div class="col-lg-1 cmbMarg">UserDef 1</div>
+            <div class="col-xs-3 cmbMarg">
+                <input type="text" class="form-control txtSmall dtTxt" name="usrDef1" formControlName="UsrDef1"  />
+            </div>
+        </div>
+
+        <div class="row lnHeight tblMargin">
+        <div class="col-1 rwLeft"></div>
+          <!--  <div class="col-sm-1" *ngIf="!IsEdit"> </div>-->
+            <div class="col-lg-1">
+                Limit
+            </div>
+            <div class="col-sm-2"> 
+                <input type="text" class="form-control txtSmall dtTxt" name="limit" formControlName="Limit"  />
+            </div>
+          
+            <div class="col-lg-1 cmbMarg">Deductible</div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control txtSmall dtTxt" name="deductible" formControlName="Deductible"  />
+            </div>
+
+            <div class="col-sm-3">&nbsp;</div>
+        </div>
+       
+    <div class="row tblMargin" *ngIf="IsEdit">
+            <div class="col-1 rwLeft"></div>
+            <div class="col-sm-1" >
+            <label>File Path</label>
+        </div>
+        <div class="col-sm-5"> 
+            <input type="text" class="form-control txtSmall" name="filePath" readonly formControlName="FilePath" />
+        </div>
+        <div class="col-sm-7"></div>
+    </div>
+
+    <div class="row tblMargin margBtm" *ngIf="!IsEdit">
+        <div class="col-sm-9" >&nbsp;</div>
+        <div class="col-sm-3">
+            <button class="btn-sm btn-info btn-outline-rounded btnMarg btnMargRt" (click)="Save(true)" [disabled]="!ImportForm.valid">Next > Mappings</button>
+        </div>
+        
+        
+    </div>
+
+    <div class="row tblMargin margBtm" *ngIf="IsEdit">
+        <div class="col-sm-9">&nbsp;</div>
+        <div class="col-sm-3">
+            <button class="btn-sm btn-info btn-outline-rounded btnMarg btnMargRt" (click)="Save(true)" [disabled]="!ImportForm.valid">Next > Map Fields</button>
+        </div>
+       
+        
+    </div>
+    
+
+</div>
+
+</form>
+</div>
+</div>
+</div>

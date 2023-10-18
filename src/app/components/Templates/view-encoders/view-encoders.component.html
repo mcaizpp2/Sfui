@@ -1,0 +1,56 @@
+<ng-template #newTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">New Template</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="NewForm">
+      <div class="row">
+        <div class="col-sm-2">
+            <label class="padTop">Name</label>
+        </div>
+        <div class="col-sm-6">
+            <input type="text" class="form-control txtSmall" name="name" formControlName="name"  />
+        </div>
+      </div>
+
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!NewForm.valid" (click)="Create()">Create</button>
+        </div>
+      </div>
+    </form>
+</div>
+
+</ng-template>
+
+<div class="sectionHeader">
+    <div class="sectionContent">
+        <div class="row padBtmBtns">
+            <div class="col-sm-4">
+               <button class="btn btn-info btn-square btn-sm margLeft" (click)="New()" >New</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sectionContent">
+        <div class="row tblMargin">
+            <div class="sectionContent sectionTop">
+                <ag-grid-angular
+                    *ngIf="HasLoaded"
+                    style="width: 377px;"
+                    class="ag-theme-balham marg"
+                    [rowData]="Encoders"
+                    [columnDefs]="ColumnDefs"
+                    [gridOptions]="Options"
+                    (cellDoubleClicked)='onCellClicked($event)'
+                    [rowSelection]="RowSelection"
+                    [overlayNoRowsTemplate]="NoRowsTemplate"
+                    (gridReady)="onGridReady($event)">
+                  </ag-grid-angular>
+            </div>
+        </div>
+    </div>
+</div>

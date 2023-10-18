@@ -1,0 +1,52 @@
+.wdthLrg
+{
+    width: 80px; 
+}
+.algn
+{
+  vertical-align: -webkit-baseline-middle;
+}
+
+.dropzone {
+    Height: 80px;
+    width: 220px;
+    display: table;
+    background-color: #17a2b8;
+    border: 0px !important ;
+  }
+
+  .fileDrop{ margin: auto; height: 80px; border: 2px dotted #000000 !important; border-radius: 30px; }
+  
+  .fileDropTxt
+  {
+    color: #ffffff !important;
+    /* font-weight: bold; */
+    background-color: #17a2b8;
+  }
+
+  .success
+  {
+    color: green !important;
+    font-weight: bold;
+  }
+
+  .fail
+  {
+    color : red;
+    font-weight: bold;
+  }
+  
+  .weight
+  {
+    font-weight : bold;
+  }
+
+  .tblBot
+  {
+    margin-bottom: 4px;
+  }
+
+  .tblLeft
+  {
+    margin-left: 20px;
+  }

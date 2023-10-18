@@ -1,0 +1,161 @@
+.padBot
+{
+    padding-bottom: 5px;
+    padding-right:  0.7rem !important;
+    padding-top:0.7rem !important;
+}
+
+.marg
+{
+    padding-top:12px;
+}
+
+.logOut
+{
+    margin-top:15px;
+    color: #FFFFFF;
+    margin-left:20px;
+}
+
+.margTop
+{
+    margin-top:9px;
+}
+
+
+.header
+{
+    background-color: black;
+    color:#FFFFFF;
+    height: 60px;
+    padding-top:26px;
+    padding-left:50px;
+    font-size:24px;
+    
+}
+
+.nav-link.active
+{
+    color: #fec503;
+}
+
+.activeLink
+{
+    color: #fec503 !important;
+}
+
+.bgGloss
+{
+   background: linear-gradient(to bottom, #1b1b1b 0%, #151515 100%);
+}
+
+.fnt
+{
+    font-family: 'Montserrat','Segoe UI', Roboto, 'Helvetica Neue',
+     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 
+     'Noto Color Emoji' !important;
+     font-size:22px !important;
+     font-weight:bold;
+}
+
+.fa-sign-out:hover {
+    color: #fed136 !important;
+}
+
+.btnRadius
+{
+    border-radius: 0rem !important;
+}
+
+.drpMenu
+{
+    margin: 0 0 0 !important;
+    font-size: 14px !important;
+    border-radius: 0rem !important;
+    border: 1px solid transparent !important;
+}
+
+.Tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  /* Tooltip text */
+  [data-tooltip]:before {            
+    position : absolute;
+     content : attr(data-tooltip);
+     opacity : 0;
+}
+
+[data-tooltip]:hover:before {        
+    opacity : 1;
+}
+
+.successTitle
+{
+    font-weight:bold !important;
+    color: #1dd31d !important;
+    background-color: #000000 !important;
+   
+}
+
+.infoTitle
+{
+    font-weight:bold;
+    color: #3484b8 !important;
+}
+
+.errorTitle
+{
+    font-weight:bold;
+    color: #B1001D;
+    font-size:14px !important;
+}
+
+
+.customMessageClass
+{
+    line-height:0px !Important;
+}
+
+.toast
+{
+    background-color: #000000 !important;
+}
+
+.toast-custom {
+    background-color: #f7eeee !important;
+  }
+
+.messageBody
+{
+    font-weight:bold;
+    color: #ffffff;
+}
+
+.title{
+    font-size:14px !important   ;
+}
+
+.successTitle
+{
+    font-weight:bold !important;
+    color: #1dd31d !important;
+    background-color: #000000 !important;
+}
+
+.infoTitle
+{
+    font-weight:bold;
+    color: #3484b8 !important;
+}
+
+.errorTitle
+{
+    font-weight:bold;
+    color: #B1001D;
+    font-size:14px !important;
+}
+
+ 

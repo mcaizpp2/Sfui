@@ -1,0 +1,57 @@
+.dropzone {
+    Height: 80px;
+    width: 180px;
+    display: table;
+    background-color: #17a2b8;
+    border: 0px !important ;
+  }
+
+  .man{
+      color: red;
+      font-weight:bold;
+  }
+
+  .cmbMarg
+  {
+    margin-left: 18px;
+  }
+  
+
+  .dtTxt
+  {
+    width:190px;
+   
+  }
+
+  .lblWidth
+  {
+    width:140px;
+  }
+
+  .filedrop{ margin: auto; height: 80px; border: 2px dotted #000000 !important; border-radius: 30px; }
+  
+  .fileDropTxt
+  {
+    color: #ffffff;
+    /* font-weight: bold; */
+    background-color: #17a2b8;
+  }
+
+  .btnMarg
+  {
+    margin-left:30px;
+  }
+
+  .margLeftOne
+  {
+    margin-left: 1px;
+  }
+
+  .cardCust
+  {
+    background-color: transparent; 
+     border: 0px solid rgba(0,0,0,.125);
+  }
+ 
+
+

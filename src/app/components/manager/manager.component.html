@@ -1,0 +1,150 @@
+<ng-template #content let-c="close" let-d="dismiss">    
+    <div class="modal-header bg-dark">
+        <h4 class="modal-title modalTitle" id="modal-basic-title">Delete Mapped Locations</h4>  
+        <button type="button" class="close modalClose" aria-label="Close" (click)="CloseModal()">
+            <span aria-hidden="true">×</span>
+          </button>
+    </div>    
+    <div class="modal-body">    
+        <p>Are you sure you want to delete all mapped Locations?</p>    
+    </div>    
+    <div class="modal-footer">  
+        <button type="button" class="btn-sm btn-success btn-outline-rounded btn-info" (click)="DeleteLocations()">Yes</button>    
+        <button type="button" class="btn-sm btn-success btn-outline-rounded btn-info" (click)="CloseModal()">No</button>    
+    </div>    
+</ng-template>
+
+<div class="sectionHeader">
+
+    <div class="sectionContent">
+        <form>
+        <div class="row tblMargin">
+            
+            <div class="col-sm-1 ">
+                <div class="checkbox chk">
+                    <input type="checkbox" id="c1" name="cb" [(ngModel)]="Imported">
+                    <label for="c1">Imported</label>
+                </div>
+
+            </div>
+            <div class="col-sm-1 ">
+                <div class="checkbox chk">
+                    <input type="checkbox" id="c2" name="cb2" [(ngModel)]="InProgress">
+                    <label for="c2">Progress</label>
+                </div>
+            </div>   
+            <div class="col-sm-1">
+                <div class="checkbox chk">
+                    <input type="checkbox" id="c23" name="cb23" [(ngModel)]="Completed">
+                    <label for="c23">Complete</label>
+                </div>
+            </div> 
+            <div class="col-sm-1">
+                <div class="checkbox chk">
+                    <input type="checkbox" id="c24" name="cb24" [(ngModel)]="Failed">
+                    <label for="c24">Failed</label>
+                </div>
+            </div> 
+                   <!--<p> <input type="checkbox" id="c1" name="cb" [(ngModel)]="Imported" >
+                    <label for="c1" class="noLnHeight">Imported</label>
+                   -->
+                <!-- <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="Imported" name="imported">Imported</label>
+                
+                    <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="InProgress" name="inprogress">in Progress</label> -->
+                
+                   <!-- <input type="checkbox" id="c2" name="cb1" [(ngModel)]="InProgress" >
+                    <label for="c2" class="noLnHeight">In Progress</label>
+
+                    <input type="checkbox" id="c3" name="completed" [(ngModel)]="Completed">
+                    <label for="c3" class="noLnHeight">Complete</label>
+                   -->
+                
+                    <!--</p> <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="Completed" name="completed">Complete</label>
+            </div> -->
+            <div class="col-sm-1"></div>
+            <div class="col-xs-1">
+                <label class="lblMargin">Account</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control txtSmall" name="account" [(ngModel)]="Account"  />
+            </div>
+            <div class="col-sm-2">
+                <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Filter()">Filter</button>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Import()">New Import</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="row tblMargin">
+        <div class="sectionContent sectionTop">
+            <ag-grid-angular
+                *ngIf="HasLoaded"
+                style="width: 1467px;"
+                class="ag-theme-balham marg"
+                [rowData]="_conversions"
+                [columnDefs]="ColumnDefs"
+                [gridOptions]="Options"
+                (cellDoubleClicked)='onCellClicked($event)'
+                [rowSelection]="RowSelection"
+                [overlayNoRowsTemplate]="NoRowsTemplate"
+                (gridReady)="onGridReady($event)">
+            </ag-grid-angular>
+            <div class="marg">
+                <app-pager [Paging]="Paging" [TypeId]="1" (PagingChanged)="PageChanged($event)"></app-pager>
+            </div>
+        </div>
+      
+    </div>
+    <!--<div class="row tblMargin">
+        <gui-grid style="margin-right:12px;margin-left:12px;"
+				  [rowHeight]="28"
+                  [width]="1460"
+				  [source]="_conversions"
+                  [paging]=true>
+                  <gui-grid-column header="ConversionId" width="100" field="convId">
+                  </gui-grid-column>
+                
+            
+                <gui-grid-column header="Status" field="status" width="120" >
+                    <ng-template let-value="value">
+                        {{Status[value]}}
+                    </ng-template>
+                </gui-grid-column>
+                <gui-grid-column header="Account Name" field="account" width="275">
+                    <ng-template let-value="value">
+                        {{value.name}}
+                    </ng-template>
+                </gui-grid-column>
+                <gui-grid-column header="File" field="file" width="320">
+                </gui-grid-column>
+                <gui-grid-column header="Currency" field="currency" width="120">
+                    <ng-template let-value="value">
+                        {{value.name}}
+                    </ng-template>
+                </gui-grid-column>
+                <gui-grid-column header="User" field="user" width="130">
+                    <ng-template let-value="value">
+                        {{value.name}}
+                    </ng-template>
+                </gui-grid-column>
+                <gui-grid-column header="Received" field="received" width="130">
+                    <ng-template let-value="value">
+                        {{value}}
+                    </ng-template>
+                </gui-grid-column>
+            
+                
+		</gui-grid>
+    </div>
+-->
+   <!-- <div class="row tblMargin">
+        <div class="col-sm-11"> 
+            <ngb-pagination [collectionSize]="Pages * 10" [maxSize]="10" [(page)]="SelectedPage" [rotate]="true" size="sm" (pageChange)="Filter($event)" ></ngb-pagination>
+        </div>
+    
+    </div>-->
+</div>
+
