@@ -1,0 +1,31 @@
+.padUp
+{
+    margin-left:60px;
+    margin-right:10px;
+    margin-top:3px;
+    color:#fed136;
+}
+
+.padDown
+{
+    margin-right:6px;
+    margin-left: 10px;
+    margin-top:3px;
+    color:#fed136;
+    background-color: transparent !important;
+}
+
+.fa-override {
+    border-style: none;
+    padding: 0;
+  }
+
+.numTxt
+{width: 20px;
+    height: 20px;
+    text-align: center;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: none;
+    
+}

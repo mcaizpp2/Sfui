@@ -1,0 +1,863 @@
+<div id="occOptions" class="sidenav">
+  <!--<a href="javascript:void(0)" class="closebtn" onclick="CloseOccupancy()">&times;</a>
+  --><button type="button" class="close modalClose closebtn" aria-label="Close" (click)="CloseOccupancy()">
+    <span aria-hidden="true">×</span>
+  </button>
+  <h4 class="modal-title modalTitle sideTitle header" id="modal-basic-title">Change Occupancy Input</h4>
+  <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 lblTxt bld">
+          The Occupancy Input is - <b class="imp">{{FieldInput}}</b>
+        </div>
+      </div>
+      <div class="row topSpace">
+        <div class="col-sm-12 lblTxt bld bottom">Most used Occupancies - </div>
+      </div>
+      <ng-container  *ngFor="let comm of CommonOccupancies; let i = index" >
+        <div class="row">
+          <div class="col-sm-1 lblTxt bld">{{i}})</div>
+          <div class="col-sm-1 lblTxt">{{comm.scheme}}</div>
+        <div class="col-sm-9 lblTxt">
+          <label>{{comm.name}}</label>
+        </div>
+      </div>
+      </ng-container>
+
+      <div class="row topSpace">
+        <div class="col-sm-12 lblTxt bld">
+          Selected Occupancy is -
+        </div>
+      </div>
+      <div class="row topSpace">
+        <div class="col-sm-12 ctrls">
+          <ng-select class="selectStyle customMed"
+          id="testNameP"
+          [items]="OccupancyCopies"
+          class="cmbWidth"
+          bindLabel="name"
+          [(ngModel)]="SelectedOccupancyTypeId"
+          (ngModelChange)="onOccChange()"
+          placeholder="Please select an Occupancy"
+          bindValue="id"
+          clearable="true"
+          style="padding-left:10px;"
+          name="occInputLookup"
+          clearAllText="Clear">
+          </ng-select>
+        </div>
+      </div>
+      <div class="row padTxtTop topSpace">
+        <div class="col-sm-12 lblTxt bld">
+          Apply to All Occupancies containing the input -
+        </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="smlPd col-sm-10">
+          <input type="text" class="form-control ctrls" [(ngModel)]="SelectedTxt"  name="locName" (ngModelChange)="onOccTxtChanged()" />
+        </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-6 smlPd">
+          <button class="btn-nav btn-sm btn-outline-rounded" [disabled]="!Apply" (click)="ApplyOccInputValue()"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+      </div>
+    </form>
+    </div>
+</div>
+
+<div id="buildingOptions" class="sidenav">
+  <button type="button" class="close modalClose closebtn" aria-label="Close" (click)="CloseBuilding()">
+    <span aria-hidden="true">×</span>
+  </button>
+  <h4 class="modal-title modalTitle sideTitle header" id="modal-basic-title">Change By Building Input</h4>
+  <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 lblTxt bld">
+          The Building Input is - <b class="imp">{{FieldInput}}</b>
+        </div>
+      </div>
+      <div class="row topSpace">
+        <div class="col-sm-11 ctrls smlPd">
+          <ng-select class="selectStyle customMed"
+            #i
+            [items]="BuildingClassCopies"
+            class="cmbWidth"
+            bindLabel="name"
+            [(ngModel)]="SelectedBuildingId"
+            (ngModelChange)="onBuildingChange()"
+            placeholder="Please select a Building Class"
+            bindValue="id"
+            clearable="true"
+            name="bldgLookup"
+            clearAllText="Clear">
+            </ng-select>
+        </div>
+      </div>
+      <div class="row padTxtTop topSpace">
+        <div class="col-sm-12 lblTxt bld">
+          Apply to All Building Input's containing the following text -
+        </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="smlPd col-sm-10 noRpad">
+          <input type="text" class="form-control ctrls" [(ngModel)]="SelectedTxt"  name="bldgInput" (ngModelChange)="onBuildingTxtChanged()" />
+        </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-6 smlPd">
+          <button class="btn-nav btn-sm btn-outline-rounded" [disabled]="!Apply" (click)="ApplyBuildingInputValue()"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+      </div>
+    </form>
+    </div>
+</div>
+  
+  
+  <ng-template #assumptionsModel let-modal>
+      <div class="modal-header bg-dark">
+        <h4 class="modal-title modalTitle" id="modal-basic-title">Assumptions</h4>
+        <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          The following describes all assumptions made during the processing of this account -
+          <table class="table table-striped tblMargin">
+              <thead>
+                  <tr>
+                    <th class="customth">#</th>
+                    <th class="customth">Assumption</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let ass of Assumptions; let i = index">
+              <tr class="trLineHeight" (click)="SetClickedRow(i)" [class.active]="i == SelectedRow">
+                  <td class="td">{{ass.order}}</td>
+                  <td class="td">{{ass.assumption}}</td>
+              </tr>
+              </ng-container>
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn btn-info btn-sm" (click)="modal.close('Save click')">Ok</button>
+      </div>
+  </ng-template>
+
+  <ng-template #summary let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Filters</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-12">
+          Filter by unknown values  -
+        </div>
+      </div>
+      <table>
+        <tr>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.occupancy"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.selectedOccupancy"
+            (ngModelChange)="onUnknownChanged(SummaryDto.selectedOccupancy,1)"
+            placeholder="Select an Occupancy"
+            bindValue="text"
+            clearable="true"
+            name="lkpOccupancy"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.buildingClass"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.selectedBuilding"
+            (ngModelChange)="onUnknownChanged(SummaryDto.selectedBuilding, 2)"
+            placeholder="Select a Building class"
+            bindValue="text"
+            clearable="true"
+            name="lkpBuilding"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.sprinkler"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.selectedSprinkler"
+            (ngModelChange)="onUnknownChanged(SummaryDto.selectedSprinkler,3)"
+            placeholder="Select a Sprinkler value"
+            bindValue="text"
+            clearable="true"
+            name="lkpSprinkler"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+            <button type="button" class="btn btn btn-info btn-sm alignBtn"
+            [disabled]="filterDisabled()" (click)="filter()">Filters</button>
+    
+          </td>
+        </tr>
+      </table>
+      <div class="row" style="margin-top:10px;">
+        <div class="col-sm-12">
+          Filter by Distinct values  -
+        </div>
+      </div>  
+      <table>
+        <tr>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.distinctInputs.occupancy"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.distinctInputs.selectedDisOccupancy"
+            (ngModelChange)="onDisChanged(SummaryDto.distinctInputs.selectedDisOccupancy,1)"
+            placeholder="Select an Occupancy"
+            bindValue="text"
+            clearable="true"
+            name="lkpDisOccupancy"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.distinctInputs.building"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.distinctInputs.selectedDisBuilding"
+            (ngModelChange)="onDisChanged(SummaryDto.distinctInputs.selectedDisBuilding, 2)"
+            placeholder="Select a Building class"
+            bindValue="text"
+            clearable="true"
+            name="lkpDisBuilding"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.distinctInputs.sprinkler"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.distinctInputs.selectedDisSprinkler"
+            (ngModelChange)="onDisChanged(SummaryDto.distinctInputs.selectedDisSprinkler,3)"
+            placeholder="Select a Sprinkler value"
+            bindValue="text"
+            clearable="true"
+            name="lkpDisSprinkler"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+            <button type="button" class="btn btn btn-info btn-sm alignBtn"
+            [disabled]="distinctFilterDisabled()" (click)="distinctFilter()">Filters</button>
+    
+          </td>
+        </tr>
+      </table>
+    
+   <!-- <div class="row" style="margin-top:10px;">
+      <div class="col-sm-12">
+        Filter by Morph Rating  -
+      </div>
+      <table>
+        <tr>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.occupancyRating"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.selectedOccupancyRating"
+            (ngModelChange)="onRatingChanged(SummaryDto.selectedOccupancyRating,1)"
+            placeholder="Select an Occupancy Rating"
+            bindValue="text"
+            clearable="true"
+            name="lkpOccupancyRating"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+            <ng-select class="selectStyle sumCmbWidth"
+            [items]="SummaryDto.buildingRating"
+            bindLabel="text"
+            [(ngModel)]="SummaryDto.selectedBuildingRating"
+            (ngModelChange)="onRatingChanged(SummaryDto.selectedBuildingRating, 2)"
+            placeholder="Select a Building Rating"
+            bindValue="text"
+            clearable="true"
+            name="lkpBuildingRating"
+            clearAllText="Clear">
+            </ng-select>
+          </td>
+          <td class="trantd">
+           &nbsp;
+          </td>
+          <td class="trantd">
+            <button type="button" class="btn btn btn-info btn-sm alignBtn"
+            [disabled]="ratingFilterDisabled()" (click)="ratingFilter()">Filters1</button>
+    
+          </td>
+        </tr>
+      </table>
+    </div> -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn btn-info btn-sm" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+  <ng-template #state let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change State</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      <div class="row">
+          <div class="col-sm-4">
+      
+              <ng-select class="selectStyle customMed"
+              #i
+              [items]="States"
+              class="cmbWidth"
+              bindLabel="name"
+              [(ngModel)]="SelectedStateId"
+              (ngModelChange)="onStateChange()"
+              placeholder="Please select a State"
+              bindValue="stateId"
+              clearable="true"
+              name="stateLookup"
+              clearAllText="Clear">
+              </ng-select>
+          </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyStateCode(true)"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="ApplyStateCode(false)" [disabled]="!Apply">Apply</button>
+        </div>
+      </div>
+      </form>
+    </div>
+
+  </ng-template>
+
+  <ng-template #txt let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change {{ModalTitle}}</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      <div class="row">
+          <div class="col-sm-12">
+            <input type="text" class="form-control" [(ngModel)]="SelectedTxt"  name="txte" (ngModelChange)="onTxtChanged()" />
+          </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true)"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="ApplyValue(false)" [disabled]="!Apply">Apply</button>
+        </div>
+      </div>
+      </form>
+      </div>
+  </ng-template>
+
+  <ng-template #occInput let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change By Occupancy Input</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="ModalOccupancyClose()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+          <div class="col-sm-12 lblTxt bld">
+            The Occupancy Input is - {{FieldInput}}
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-sm-5 lblTxt bld">Most used Occupancies - </div>
+          <div class="col-sm-8 lblTxt"></div>
+        </div>
+        <ng-container *ngFor="let comm of CommonOccupancies; let i = index" >
+          <div class="row">
+            <div class="col-sm-1 lblTxt bld">{{i}})</div>
+            <div class="col-sm-1 lblTxt">{{comm.scheme}}</div>
+          <div class="col-sm-6 lblTxt">
+            <label>{{comm.name}}</label>
+          </div>
+          </div>
+        </ng-container>
+        <div class="row">
+            <div class="col-sm-12">
+              <ng-select class="selectStyle customMed"
+              #i
+              [items]="Occupancies"
+              class="cmbWidth"
+              bindLabel="name"
+              [(ngModel)]="SelectedOccupancyTypeId"
+              (ngModelChange)="onOccChange()"
+              placeholder="Please select an Occupancy"
+              bindValue="id"
+              clearable="true"
+              name="occLookup"
+              clearAllText="Clear">
+              </ng-select>
+            </div>
+        </div>
+        <div class="row padTxtTop">
+          <div class="col-sm-12 lblTxt bld">
+            Apply to All Occupancies containing the input -
+          </div>
+        </div>
+        <div class="row padTxtTop">
+          <div class="col-sm-6">
+            <input type="text" class="form-control" [(ngModel)]="SelectedTxt"  name="locName" (ngModelChange)="onOccTxtChanged()" />
+          </div>
+        </div>
+       
+        <div class="row padTxtTop">
+          <div class="col-sm-3">
+            <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyOccInputValue()"> Apply To All ({{SameValCtr}}) </button>
+          </div>
+        </div>
+        </form>
+        </div>
+  </ng-template>
+
+  <ng-template #occ let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change Occupancy</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="CloseModal()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 lblTxt bld">
+          The Occupancy Input is - {{FieldInput}}
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-sm-5 lblTxt bld">Most used Occupancies - </div>
+        <div class="col-sm-8 lblTxt"></div>
+      </div>
+      <ng-container *ngFor="let comm of CommonOccupancies; let i = index" >
+        <div class="row">
+          <div class="col-sm-1 lblTxt bld">{{i}})</div>
+          <div class="col-sm-1 lblTxt">{{comm.scheme}}</div>
+        <div class="col-sm-6 lblTxt">
+          <label>{{comm.name}}</label>
+        </div>
+        </div>
+      </ng-container>
+      <div class="row">
+          <div class="col-sm-12">
+            <ng-select class="selectStyle customMed"
+            #i
+            [items]="Occupancies"
+            class="cmbWidth"
+            bindLabel="name"
+            [(ngModel)]="SelectedOccupancyTypeId"
+            (ngModelChange)="onOccChange()"
+            placeholder="Please select an Occupancy"
+            bindValue="id"
+            clearable="true"
+            name="occLookup"
+            clearAllText="Clear">
+            </ng-select>
+          </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true, false)"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+        <div class="col-sm-4" *ngIf="IsUnknown">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(false, true)"> Apply To Unknown ({{LocsWithNoOccupancyCtr}}) </button>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="ApplyValue(false, false)" [disabled]="!Apply">Apply</button>
+        </div>
+      </div>
+      </form>
+      </div>
+
+  </ng-template>
+
+  <ng-template #building let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change Building Class</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 lblTxt">
+          The Building Class Input is - <b>{{FieldInput}}</b>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12 topSpace">
+            <ng-select class="selectStyle customMed"
+            #i
+            [items]="BuildingClass"
+            class="cmbWidth"
+            bindLabel="name"
+            [(ngModel)]="SelectedBuildingId"
+            (ngModelChange)="onBuildingChange()"
+            placeholder="Please select a Building Class"
+            bindValue="id"
+            clearable="true"
+            name="bldgLookup"
+            clearAllText="Clear">
+            </ng-select>
+          </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true)"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="ApplyValue(false)" [disabled]="!Apply">Apply</button>
+        </div>
+      </div>
+      </form>
+      </div>
+
+  </ng-template>
+
+  <ng-template #country let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change Country</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      <div class="row">
+          <div class="col-sm-4">
+      
+              <ng-select class="selectStyle customMed"
+              #i
+              [items]="Countries"
+              class="cmbWidth"
+              bindLabel="isoCode"
+              [(ngModel)]="SelectedCountryId"
+              (ngModelChange)="onCountryChange()"
+              placeholder="Please select a Country"
+              bindValue="countryId"
+              clearable="true"
+              name="countryLookup"
+              clearAllText="Clear">
+              </ng-select>
+            </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true)"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="ApplyValue(false)" [disabled]="!Apply">Apply</button>
+        </div>
+      </div>
+      </form>
+      </div>
+
+  </ng-template>
+
+  <ng-template #locName let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Custom Location Name</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12">
+          <input type="text" class="form-control" [(ngModel)]="SelectedTxt"  name="locName" (ngModelChange)="onTxtChanged()" />
+        </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true,false)"> Apply To All </button>
+        </div>
+      </div>
+      </form>
+      </div>
+
+  </ng-template>
+
+  <ng-template #county let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change County</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="text" class="form-control" [(ngModel)]="SelectedTxt"  name="county" (ngModelChange)="onTxtChanged()" />
+          </div>
+        </div>
+        <div class="row padTxtTop">
+          <div class="col-sm-3">
+            <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true)"> Apply To All ({{SameValCtr}}) </button>
+          </div>
+          <div class="col-sm-3">
+            <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true,false)"> Apply To All</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </ng-template>
+
+  <ng-template #sprinkler let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">Change Sprinkler</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 lblTxt bld">
+          The Sprinkler Input is - {{FieldInput}}
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-4">
+      
+              <ng-select class="selectStyle customMed"
+              #i
+              [items]="Sprinklers"
+              class="cmbWidth"
+              bindLabel="value"
+              [(ngModel)]="SelectedSprinklerId"
+              (ngModelChange)="onSprinklerChange()"
+              placeholder="Please select a Sprinkler"
+              bindValue="sprinklerId"
+              clearable="true"
+              name="sprinklerLookup"
+              clearAllText="Clear">
+              </ng-select>
+            </div>
+      </div>
+      <div class="row padTxtTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!Apply" (click)="ApplyValue(true)"> Apply To All ({{SameValCtr}}) </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="ApplyValue(false)" [disabled]="!Apply">Apply</button>
+        </div>
+      </div>
+      </form>
+      </div>
+
+  </ng-template>
+
+  <ng-template #load let-modal>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">{{ParsingHeader}}</h4>
+    
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <ngb-progressbar [value]="ProgressPercent" style="padding-left: 4px;padding-right: 4px;"
+          [striped]="true" [animated]="true"></ngb-progressbar>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <span class="bld lblTxt noLineHeight"> {{ProgressTxt}}</span>
+        </div>
+      </div>
+     
+    </div>
+
+  </ng-template>
+
+<div class="sectionHeader">
+    <div class="sectionContent sectionTop">
+        <div class="row padBtmBtns">
+          <div class="col-sm-4">
+              <button class="btn btn-info btn-square btn-sm margLeft" [disabled]="HasLoaded" (click)="Load()" >Map</button>
+              <button class="btn btn-info btn-square btn-sm margLeft" [disabled]="!HasLoaded" (click)="Refresh()" >Load</button> 
+              <button class="btn btn-info btn-square btn-sm margLeft wdth" [disabled]="!HasCompleted" (click)="ViewAssumptions(assumptionsModel)">Assumptions</button>
+              <button class="btn btn-info btn-square btn-sm margLeft wdth" [disabled]="!HasCompleted" (click)="CustomName()">Loc Name</button>
+              <button class="btn btn-info btn-square btn-sm margLeft wdth" [disabled]="!HasReconciled" (click)="Reconcile()">Reconcile</button>
+              <button class="btn btn-info btn-square btn-sm margLeft wdthLrg" [disabled]="!HasCompleted" (click)="ViewSummary(summary)">{{SummaryBtn}}</button>
+              <button class="btn btn-info btn-square btn-sm margLeft wdthLrg" [disabled]="!HasCompleted" (click)="resetFilters()">Reset Filters</button>
+          </div>
+
+          <div class="col-xs-1 padTxtTop">
+            <span> Total Tiv -  </span>
+          </div>
+          <div class="col-sm-1 padTxtTop">
+          <span class="bld">{{TotalTiv | number}}</span> 
+          </div>
+
+          <div class="col-xs-1 padTxtTop">
+            <span class="bld">{{CountryTxt}}</span>
+          </div>
+        
+
+        <div class="col-sm-1">
+          <button class="btn btn-info btn-square btn-sm margLeft" (click)="Export()" [disabled]="!HasLoaded">Export</button>
+        </div>  
+      </div>
+    </div>5
+    <div class="sectionContent sectionTop" *ngIf="HasCompleted">
+      <nav class="navLeft">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="active nav-link active" id="mapping-tab" data-toggle="tab" href="#mappings">Locations Mappings</button>
+          <button class="nav-link" id="locations-tab" data-toggle="tab" href="#locations">Location Confidence</button>
+          <button class="nav-link" id="morph-tab" data-toggle="tab" href="#morph">Morph Confidence</button>
+        </div>
+      </nav>
+      <div class="tab-content clearfix">
+        <div class="tab-pane active" id="mappings" #mappingsTab>
+          <ag-grid-angular
+          
+          style="width: 1478px; height: 542px;"
+          class="ag-theme-balham marg"
+          [rowData]="Locations"
+          [columnDefs]="ColumnDefs"
+          [gridOptions]="Options"
+          (gridReady)="onGridReady($event)"
+          [rowSelection]="RowSelection"
+          [overlayNoRowsTemplate]="NoRowsTemplate"
+          (cellDoubleClicked)='onCellClicked($event)'
+          (firstDataRendered)='onFirstDataRendered()' >
+          </ag-grid-angular>
+        </div>
+        <div class="tab-pane" id="locations">
+          <table id="locationTivs" style="width: 601px;" class="marg">
+            <tr>
+              <th style="width:200px;" class="customth th">Country</th>
+              <th style="width:200px;" class="customth th">Total TIV</th>
+              <th style="width:200px;" class="customth th">Building TIV</th>
+              <th style="width:200px;" class="customth th">Occupancy TIV</th>
+            </tr>
+            <ng-container *ngFor = "let row of Confidence.locationTivDtos">
+            <tr class="tdRow">
+              <td class="cusTd bld">
+                {{row.country}}
+              </td>
+              <td class="cusTd bld">
+                {{ row.totalTiv | number:'1.0':'en-US' }}
+              </td>
+              <td class="cusTd bld">
+                {{ row.bldgTiv | number:'1.0':'en-US' }}
+              </td>
+              <td class="cusTd bld">
+                {{ row.occTiv | number:'1.0':'en-US' }}
+              </td>
+            </tr>
+            <ng-container *ngFor = "let stRow of row.locationStateTivDtos">
+              <tr class="tdRow">
+                <td class="cusTd padLeft">
+                  <a [routerLink]=""  (click)="SetStateFilter(stRow.state)" >{{stRow.state}}</a>
+                </td>
+                <td class="cusTd">
+                 {{ stRow.totalTiv | number:'1.0':'en-US' }}
+                </td>
+                <td class="cusTd">
+                  {{ stRow.bldgTiv | number:'1.0':'en-US' }}
+                </td>
+                <td class="cusTd">
+                  {{ stRow.occTiv | number:'1.0':'en-US' }}
+                </td>
+              </tr>
+            </ng-container>
+            </ng-container>
+            <tfoot class="tfoot">
+              <tr>
+                <td>Grand total</td>
+                <td>{{Confidence.totalTiv | number:'1.0':'en-US'}}</td>
+                <td>{{Confidence.bldgTiv | number:'1.0':'en-US'}}</td>
+                <td>{{Confidence.occTiv | number:'1.0':'en-US'}}</td>
+              </tr>
+          </table>
+        </div>
+        <div class="tab-pane" id="morph">
+          
+          <table id="locationRating" style="width: 801px;" class="marg">
+            <tr>
+              <th style="width:200px;" class="customth th">Country</th>
+              <th style="width:200px;" class="customth th">Building Confidence</th>
+              <th style="width:200px;" class="customth th">Occupancy Confidence</th>
+            </tr>
+            <ng-container *ngFor = "let row of Confidence.locationConfidenceDtos">
+            <tr class="tdRow">
+              <td class="cusTd bld">
+                {{row.country}}
+              </td>
+              <td class="cusTd bld">
+                {{row.sumBldgRating}}%
+              </td>
+              <td class="cusTd bld">
+                {{row.sumOccRating}}%
+              </td>
+            </tr>
+            <ng-container *ngFor = "let stRow of row.stateLocationConfidenceDtos">
+              <tr class="tdRow">
+                <td class="cusTd padLeft">
+                  <a [routerLink]=""  (click)="SetStateFilter(stRow.state)" >{{stRow.state}}</a>
+                </td>
+                <td class="cusTd">
+                  {{stRow.sumBldgRating}}%
+                </td>
+                <td class="cusTd">
+                  {{stRow.sumOccRating}}%
+                </td>
+              </tr>
+            </ng-container>
+            </ng-container>
+            <tfoot class="tfoot">
+              <tr>
+                <td>Grand total</td>
+                <td>{{Confidence.sumBldgRating}}%</td>
+                <td>{{Confidence.sumOccRating}}%</td>
+              </tr>
+          </table>
+
+        </div>
+      </div>
+ 
+
+    </div>
+    <div style="padding-top: 8px;"></div>
+    
+</div>

@@ -1,0 +1,104 @@
+.marg
+{
+    margin-top:8px;
+    margin-bottom:8px;
+    margin-left:12px;
+    margin-right:12px;
+}
+.bld{
+    font-weight:bold;
+}
+
+.margLeft
+{
+    margin-left:4px;
+    margin-bottom:2px;
+}
+
+.padLeft
+{
+    padding-left: 20px !important;
+}
+
+.wdth
+{
+    width: 58px;
+}
+
+.wdthLrg
+{
+    width: 80px; 
+}
+
+.summaryLrg
+{
+    max-width:1000px;
+}
+
+.selectStyle
+{
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: .20rem;
+  height:20px !important;
+  border-radius : 0px !important;
+}
+
+.modalTbl
+{
+    border: 0px !important;
+    border-color: transparent !important;
+}
+
+.cmbWidth
+{
+    width:300px;
+    font-size: 12px;
+}
+
+.padTxtTop
+{
+    padding-top: 5px;
+}
+
+.padBtmBtns
+{
+    padding-bottom: 4px;
+}
+
+.bld
+{
+    font-weight: bold;
+}
+
+.lblTxt
+{
+    font-size: 12px;
+}
+
+.noLineHeight
+{
+    line-height: 0 !important;
+}
+
+.sumCmbWidth
+{
+    width:190px;
+}
+
+.trantd
+{
+    border-color: transparent;
+}
+
+.alignBtn
+{
+    margin-top:18px;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,1288 @@
+﻿@import '../node_modules/@ng-select/ng-select/themes/default.theme.css';
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.min.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css";
+@import '../node_modules/ngx-toastr/toastr.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+#toast-container > div {
+  opacity:0.5;
+}
+
+.ag-theme-balham
+{
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+}
+
+.ag-body
+{
+  height: auto !important;
+  max-height: 542px;
+}
+
+
+.ag-custom-header{
+  color: #ffffff !important;
+  background-color: #000000;
+}
+
+.ag-root ::-webkit-scrollbar {
+  width: 1em;
+  height: 1em
+}
+
+
+.ag-root ::-webkit-scrollbar-thumb {
+  background: rgba(23, 162, 184, 0.5); /* #17a2b8;*/
+}​
+
+.ng-invalid:not(form) {
+  	    border-left: 5px solid #a94442;
+  	    box-sizing: border-box;
+  }
+
+  .form-control
+  {
+    font-size: 12px !important
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option
+  {
+    line-height: 22px;
+  }
+
+  body::-webkit-scrollbar {
+    color: #17a2b8;
+    height:1em;width:1em;
+  
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: #17a2b8;
+  outline: 1px solid #FFF;
+
+}
+
+div::-webkit-scrollbar {
+  height:1em;width:1em;
+}
+ 
+div::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+div::-webkit-scrollbar-thumb {
+  background-color: #17a2b8;
+  outline: 1px solid #FFF;
+}
+
+.btn-info.disabled, .btn-info:disabled{
+  border-color:#17a2b8 !important;
+  background-color:#17a2b8 !important;
+  opacity: 0.4;
+  color: #FFF;
+}
+
+.btn-nav
+{
+  border-color:#fed136 !important;
+  background-color:#fed136 !important;
+  color: #000;
+  font-weight: bold;
+}
+.btn-nav.disabled, .btn-nav:disabled{
+  border-color:#FFF !important;
+  background-color:#000 !important;
+  color: #FFF;
+}
+
+.btn-link
+{
+  color: #17a2b8;
+}
+
+.smlTxt
+{
+  font-Size:10px;
+  color: red;
+}
+
+ngb-datepicker-navigation-select>.custom-select
+{
+  font-size:12px !important;
+}
+
+.ngb-dp-day, .ngb-dp-week-number, .ngb-dp-weekday
+{
+  font-size:12px;
+}
+
+  
+.basic-link
+{
+  background-color: transparent !important;
+  text-decoration: underline !important;
+  /* color: #17a2b8 !important; */
+  /* font-weight: bold; */
+}
+
+.basic-link:hover
+{
+  text-decoration: none !important;
+  cursor: pointer;
+}
+.page-link
+{
+  background-color : #17a2b8 !important;
+  color: #FFF !important;
+}
+
+.page-item.active .page-link 
+{
+  background-color: transparent !important;
+  border-color: #17a2b8 !important;
+  color: #17a2b8 !important;
+}
+
+.wrapper {
+    align-items: stretch;
+}
+
+.content
+{
+    margin-Left:-15px;
+    margin-right:-15px;
+}
+
+body {
+    background-color: #e7e7e7;
+    overflow-x: hidden;
+    padding-top: 96px;
+    scrollbar-color: red; 
+  }
+
+  .tdRow
+  {
+    height:28px;
+    border: solid 1px #bdc3c7;
+    border-radius: 2px;
+  }
+  .cusTd{
+    border: solid 1px #bdc3c7;
+  }
+  tr:nth-child(even) {background-color: #e7e7e7}
+  .customth
+  {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-weight: 600;
+    font-size:11px;
+     color: #fff; 
+     background-color: #000;
+     box-sizing: border-box;
+    outline: none;
+    font-size: 11px;
+    align-items: center;
+    height:30px;
+    border: solid 1px #bdc3c7;
+    border-radius: 2px;
+  }
+
+  .tfoot
+  {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-weight: 600;
+    font-size:11px;
+     color: #fff; 
+     background-color: #000;
+     box-sizing: border-box;
+    outline: none;
+    font-size: 11px;
+    align-items: center;
+    height:30px;
+    border: solid 1px #bdc3c7;
+    border-radius: 2px;
+  }
+
+hr {
+    background: #f4f3ef;
+    width: 100%;
+    height: 1px;
+}
+
+hr {
+    box-sizing: content-box;
+    overflow: visible;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid white;
+    
+    margin-right:10px;
+}
+
+  #mainNav .navbar-toggler {
+    font-size: 12px;
+    right: 0;
+    padding: 13px;
+    text-transform: uppercase;
+    color: white;
+    border: 0;
+    background-color: #fed136;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+  
+  #mainNav .navbar-brand {
+    color: #fed136;
+    font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+  
+  #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+    color: #fec503;
+  }
+  
+  #mainNav .navbar-nav .nav-item .nav-link {
+    font-size: 90%;
+    font-weight: 400;
+    padding: 0.75em 0;
+    letter-spacing: 1px;
+    color: white;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+  
+  #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: #fed136;
+  }
+
+
+  @media (min-width: 992px) {
+    #mainNav {
+      padding-top: 25px;
+      padding-bottom: 25px;
+      transition: padding-top 0.3s, padding-bottom 0.3s;
+      border: none;
+      background-color: transparent;
+    }
+    #mainNav .navbar-brand {
+      font-size: 1.75em;
+      transition: all 0.3s;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+      padding: 1.1em 1em !important;
+    }
+    #mainNav.navbar-shrink {
+      padding-top: 0;
+      padding-bottom: 0;
+      background-color: #000000;
+    }
+    #mainNav.navbar-shrink .navbar-brand {
+      font-size: 1.25em;
+      padding: 12px 0;
+    }
+  }
+
+  .sectionHeader
+  {
+      position: relative;
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffebebeb', GradientType=0);
+    
+      color: #000;
+      padding-left:10px;
+      padding-right:10px;
+      padding-top:14px;
+      font-size:12px;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+
+ 
+
+  .sectionContent
+{
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-left:10px;
+    background: #FFF;
+    border: 1px solid #D5D5D5;
+    -webkit-background-clip: padding-box;
+ 
+    -moz-background-clip: padding;
+
+    background-clip: padding-box;
+    padding-top: 10px;
+    /* padding-left:10px;
+    padding-right:10px; */
+}
+
+.sectionTop
+{
+  margin-top: 10px;
+}
+
+.lnHeight
+{
+    line-height: 40px;
+}
+.tblMargin{
+    margin-left:2px;
+}
+
+.subHeader
+{
+    font-size:16px !important;
+    color : #17a2b8;
+    font-weight: bold;
+    margin-left:10px;
+}
+
+.checkbox-inline, .radio-inline {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 200;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.trLineHeight
+{
+  line-height:22px;
+}
+
+td, th {
+    border: 1px solid #000;
+    text-align: left;
+    padding: 4px !important;
+    
+}
+
+.table-striped tr.active td {
+  background-color:#17a2b8 !important;
+  color: #FFF;
+}
+
+.td {
+    font-size: 12px;
+    
+   
+}
+
+.tdSmall
+{
+    width: 20px;
+}
+
+.tblChild
+{
+    background-color: #FFF !important;
+}
+
+.tdCenter
+{
+    text-align:center;
+}
+
+thead {
+  background-color: #343a40;
+  color: #FFF;
+ 
+  line-height: 1.5;  
+  font-weight:200 !important;
+  
+}
+
+.btnMargRt
+{
+  margin-right:10px;
+  margin-bottom: 10px;
+  float:right;
+}
+
+.rwLeft
+{
+  margin-left:-40px;
+}
+
+.tblMargin{
+  margin-left:2px;
+  margin-top:8px;
+}
+
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: #e7e7e7 ;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tblComponents
+{
+  border-collapse: collapse;
+  /*margin-right:2px;*/
+  width:99%;
+  border:1px solid #000;
+
+}
+
+
+ .componentTr {
+ /* border: 0px solid transparent;
+  border-top : 0px !important;*/
+  text-align: left;
+  font-size: 12px;
+  
+}
+
+.componentTd, .componentTh
+{
+  border:1px solid black;
+
+  /*border:1px solid #FF0000;*/
+}
+
+td, th {
+  border: 1px solid #000;
+  border-top : 0px !important;
+  text-align: left;
+  font-size: 12px;
+  
+}
+
+
+
+
+.tdSmall
+{
+  width: 20px;
+}
+
+.tblChild
+{
+  background-color: #FFF !important;
+}
+
+.tdCenter
+{
+  text-align:center;
+}
+
+.errorMsg
+{
+  color : #c31f1f;
+  font-size : 11px;
+  font-weight: bold;
+}
+
+.errorHdrMsg
+{
+  font-size:11px;
+  font-weight: bold;
+}
+.errorMsgLight
+{
+  color : #17a2b8;
+  font-size : 12px;
+}
+
+
+.ngx-file-drop__drop-zone {
+  margin: auto; height: 100px; border: 0px !important; border-radius: 0px !important;
+  color : white !Important;
+
+ }
+
+ .ngx-file-drop__content
+ {
+   color: black !important;
+ }
+
+
+ .selectStyle
+{
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: .20rem;
+  height:20px !important;
+  border-radius : 0px !important;
+  font-size:12px !important;
+}
+
+.cmbSize
+{
+    font-size:12px;
+    width:120px;
+   
+}
+
+.cmbItems
+{
+    color:white;
+}
+
+.ng-select.ng-select-single .ng-select-container 
+{
+  height: 30px !important;
+}
+
+.ng-dropdown-panel.ng-select-bottom {
+  top: 36px !important;
+}
+
+.ng-select.custom {
+  min-height:10px ;
+  font-size:10px;
+  height:24px !important;
+}
+.ng-select.custom .ng-control  {            
+  min-height:10px;
+  font-size:10px;
+  height:20px !important;
+}
+
+.ng-select.custom .ng-select-container  {            
+  min-height:10px;
+  font-size:12px;
+  height:22px !important;
+}
+
+.ng-select.custom ::ng-deep .ng-select.ng-select-single .ng-select-container{            
+  min-height:12px !important;
+  font-size:10px;
+  height:20px !important;
+}
+
+.ng-select.custom ::ng-deep .ng-select-single {            
+  min-height:12px !important;
+  font-size:10px;
+  height:20px !important;
+}
+
+
+.ng-select .ng-arrow-wrapper {
+  	    cursor: pointer;
+  	    position: relative;
+  	    /* text-align: center; */
+  	    /* -webkit-user-select: none; */
+  	    -moz-user-select: none;
+  	    -ms-user-select: none;
+  	    user-select: none;
+  }
+
+  .ng-select .ng-arrow-wrapper {
+  	    width: 25px;
+  	    padding-right: 5px;
+  }
+
+  .xyz { 
+    background-size: auto; 
+    text-align: center; 
+    padding-top: 100px; 
+} 
+.btn-square.btn-sm { 
+  width: 36px; 
+  height: 30px; 
+  padding: 6px 0px; 
+  font-size: 8px; 
+  text-align: center; 
+} 
+
+.btn-circle.btn-xs { 
+  width: 16px; 
+  height: 16px; 
+  padding: 3px 2px; 
+  border-radius: 10px; 
+  font-size: 10px; 
+  text-align: center; 
+} 
+.btn-circle.btn-sm { 
+    width: 30px; 
+    height: 30px; 
+    padding: 6px 0px; 
+    border-radius: 15px; 
+    font-size: 8px; 
+    text-align: center; 
+} 
+.btn-circle.btn-md { 
+    width: 50px; 
+    height: 50px; 
+    padding: 7px 10px; 
+    border-radius: 25px; 
+    font-size: 10px; 
+    text-align: center; 
+} 
+.btn-circle.btn-xl { 
+    width: 70px; 
+    height: 70px; 
+    padding: 10px 16px; 
+    border-radius: 35px; 
+    font-size: 12px; 
+    text-align: center; 
+}
+
+
+.modalTitle
+{
+  color: #fed136 !important;
+}
+
+
+.modalClose
+{
+  color:#FFF;
+  outline: 0 !important;
+}
+
+.modalClose :hover{
+  color:#fed136 !important;
+}
+
+modalClose:focus
+{
+  color:#fed136 !important;
+}
+
+
+.modal-dialog {
+  max-width: 700px !important;
+}
+
+.ag-theme-balham .ag-row .ag-cell-data-changed {
+  background-color: #17a2b8 !important;
+  opacity: 0.7;
+}
+
+.ag-theme-balham .ag-header-icon {
+  color: white !important;
+}
+
+.ag-theme-balham .ag-select .ag-picker-field-display{
+  font-size:10px;
+}
+
+.ag-theme-balham .ag-picker-field-wrapper 
+{
+  border: 1px solid #000 !important;
+  border-radius : 0px !important;
+
+}
+
+.ag-input-field, .ag-select 
+{
+  font-size : 10px;
+}
+
+.form-control{
+  font-size:12px !important;
+}
+
+.ag-theme-balham [class^='ag-'], .ag-theme-balham [class^='ag-']:focus, .ag-theme-balham [class^='ag-']:after, .ag-theme-balham [class^='ag-']:before {
+  box-sizing: border-box;
+  outline: none;
+  font-size: 11px; 
+}
+
+.ag-label 
+{
+  font-size: 10px; 
+  margin-top: 5px;
+}
+
+.ag-theme-balham .ag-row-selected {
+  background-color: #b7e4ff !important;
+}
+
+
+/*input[type="checkbox"] {
+  visibility: hidden;
+}*/
+label {
+  cursor: pointer;
+}
+.noLnHeight
+{
+  line-height: 0px !important;
+  display : initial !important;
+}
+
+.success
+{
+  color: green !important;
+}
+
+.failure
+{
+  color: red !important;
+}
+
+.exclaim
+{
+  color: #fed136 !important;
+}
+
+input[type="checkbox"] + label:before {
+  border: 1px solid #333;
+  content: "\00a0";
+  display: inline-block;
+  font: 16px/1em sans-serif;
+  height: 16px;
+  margin: 0 .25em 0 0;
+  padding: 0;
+  vertical-align: top;
+  width: 16px;
+}
+input[type="checkbox"]:checked + label:before {
+  background: #fff;
+  color: #333;
+  content: "\2713";
+  text-align: center;
+}
+input[type="checkbox"]:checked + label:after {
+  font-weight: bold;
+}
+
+input[type="checkbox"]:focus + label::before {
+    outline: rgb(59, 153, 252) auto 5px;
+}
+
+.ag-paging-panel
+{
+  font-weight:bold;
+  color : #000000 !important;
+  font-size:12px !important;
+}
+
+.ag-icon-next
+{
+  font-size: 14px !important;
+  font-weight:bold !important;
+}
+
+.ag-icon-last
+{
+  font-size: 14px !important;
+  font-weight:bold !important;
+}
+
+.ag-icon-first
+{
+  font-size: 14px !important;
+  font-weight:bold !important;
+}
+
+.ag-icon-previous
+{
+  font-size: 14px !important;
+  font-weight:bold !important;
+}
+
+div.ag-root .ag-cell-focus {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+::ng-deep .my-class .modal-dialog { 
+  max-width: 100%;
+  width: 100%;
+}
+
+.progress-bar{
+
+  background-color : #17a2b8 !important;
+  font-weight:bold;
+  }
+
+  ::-webkit-input-placeholder {
+    font-style: italic;
+    color: #999 !important;
+ }
+ :-moz-placeholder {
+    font-style: italic;  
+    color: #999 !important;
+ }
+ ::-moz-placeholder {
+    font-style: italic;  
+    color: #999 !important;
+ }
+ :-ms-input-placeholder {  
+    font-style: italic; 
+    color: #999 !important;
+ }
+
+ .body ::-webkit-scrollbar {
+  width: 1em;
+  height: 1em;
+}
+
+.isAddedHighLight {
+  font-weight: bold;
+}
+
+.margBtm
+{
+  margin-bottom:4px;
+}
+
+/* The side navigation menu */
+.sidenav {
+  height: 90%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 83px; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background: linear-gradient(to bottom, #1b1b1b 0%, #151515 100%);
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color:#fed136;
+}
+
+.sidenav .sideTitle
+{
+    margin-left:10px;
+    font-size : 1.2rem;
+}
+
+.sidenav .lblTxt
+{
+    color:#FFF;
+    padding-left:10px;
+}
+
+.sidenav .ctrls{
+    padding-left: 0px;
+}
+.sidenav .smlPd
+{
+    padding-left: 10px;
+}
+
+.sidenav .noRpad
+{
+    padding-right : 0px;
+}
+.sidenav .btnSide
+{
+    border-color : #fed136;
+    background-color:#fed136;
+}
+
+.sidenav input:disabled {
+    border-color : #fed136 !important;
+    background-color:#fed136 !important;
+  }
+
+.sidenav .imp
+{
+    color:#fed136;
+}
+
+.sidenav .header
+{
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.topSpace
+{
+    padding-top: 15px;
+}
+
+.sidenav .topSpace
+{
+    padding-top: 15px;
+}
+
+.sidenav .bottom{
+    padding-bottom:10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+.nav-tabs
+{
+    border-bottom : 0px;
+    font-size: 9px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #6c757d;
+    background-color: #17a2b8;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus 
+{
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.navLeft
+{
+    margin-left:12px;
+}
+
+.gui-header
+{
+    background-color: #000 !important;
+    height:33px !important;
+   
+    color:#FFF !important;
+  }
+
+.gui-structure.gui-generic *
+{
+  font-size:11px !important;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+
+}
+.gui-structure
+{
+  font-size:11px !important;
+}
+
+/* The side navigation menu */
+.OpHistory {
+  height: 90%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 83px; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 40px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background: linear-gradient(to bottom, #FFF 0%, #FFF 100%);
+}
+
+/* The navigation menu links */
+.OpHistory a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.OpHistory a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.OpHistory .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color:#000;
+}
+.closebtn :hover {
+
+  color:#000 !important;
+}
+
+.OpHistory .sideTitle
+{
+    margin-left:10px;
+    font-size : 1.2rem;
+}
+
+.OpHistory .lblTxt
+{
+    color:#FFF;
+    padding-left:10px;
+}
+
+.OpHistory .ctrls{
+    padding-left: 0px;
+}
+
+.OpHistory .smlPd
+{
+    padding-left: 10px;
+}
+
+.OpHistory .noRpad
+{
+    padding-right : 0px;
+}
+.OpHistory .btnSide
+{
+    border-color : #fed136;
+    background-color:#fed136;
+}
+
+.OpHistory input:disabled {
+    border-color : #fed136 !important;
+    background-color:#fed136 !important;
+  }
+
+.OpHistory .imp
+{
+    color:#fed136;
+}
+
+.OpHistory .header
+{
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.topSpace
+{
+    padding-top: 15px;
+}
+
+.OpHistory .topSpace
+{
+    padding-top: 15px;
+}
+
+.OpHistory .bottom{
+    padding-bottom:10px;
+}
+
+.OpHistory .modalTtle
+{
+  font-size:14px;
+  color : #000;
+}
+
+
+
+.toast-top-full-width {
+  top: 0;
+  right: 0;
+  width: 100%;
+  background: #000;
+
+}
+
+.toast-top-left {
+  top: 0px;
+  width: 100%;
+  left: 0px;
+}
+
+
+.toast-container .ngx-toastr {
+  padding: 0px;
+  width: 100%;
+  height:80px;
+}
+
+.toast-error
+{
+  background-color : #000000;
+}
+
+.toast-close-button
+{
+  padding-right:20px !important;
+}
+
+
+.successTitle
+{
+    font-weight:bold !important;
+    color: #1dd31d !important;
+    background-color: #000000 !important;
+   
+}
+
+
+.infoTitle
+{
+    font-weight:bold;
+    color: #3484b8 !important;
+}
+
+.errorTitle
+{
+    font-weight:bold;
+    color: #B1001D;
+    font-size:14px !important;
+}
+
+
+
+.toast-top-full-width {
+    top: 0;
+    right: 0;
+    width: 100%;
+    background: #000;
+  
+  }
+  
+ 
+.toast-top-full-width {
+    top: 0;
+    right: 0;
+    width: 100%;
+    background: #000;
+  
+  }
+  
+  .toast-top-left {
+    top: 0px;
+    width: 100%;
+    left: 0px;
+  }
+  
+  
+  .toast-container .ngx-toastr {
+    padding: 0px;
+    width: 100%;
+  }
+  
+  .toast-error
+  {
+    background-color : #000000;
+  }
+  
+  .toast-close-button
+  {
+    padding-right:20px !important;
+  }
+
+
+.customMessageClass
+{
+    line-height:0px !Important;
+}
+
+.toast
+{
+    background-color: #000000 !important;
+}
+
+.toast-custom {
+    background-color: #f7eeee !important;
+  }
+
+
+.title{
+    font-size:12px;
+}
+
+.successTitle
+{
+    font-weight:bold !important;
+    color: #1dd31d !important;
+    background-color: #000000 !important;
+   
+}
+
+
+.infoTitle
+{
+    font-weight:bold;
+    color: #3484b8 !important;
+}
+
+.errorTitle
+{
+    font-weight:bold;
+    color: #B1001D;
+    font-size:14px !important;
+}
+.toastTbl {
+  background-color: #000000 !important;
+  width: 1000px;
+	color: #ffffff !important;
+}
+
+.messageBody {
+  font-weight: bold;
+  color: #ffffff !important;
+  font-size:13px;
+  background-color:#000000 !important;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem
+}
+
+.card>hr {
+  margin-right: 0;
+  margin-left: 0
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+
+
+
+
+
+
+
+
+  

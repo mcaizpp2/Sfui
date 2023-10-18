@@ -1,0 +1,78 @@
+<div class="modal-header bg-dark modal-lg">
+    <h4 class="modal-title modalTitle" id="modal-basic-title">{{_joinModalDto.ModalHeader}} Components</h4>
+    <button type="button" class="close modalClose" aria-label="Close" (click)="Close()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row" style="font-size:11px;">
+        <div class="col-sm-2 padTxtTop">
+          <label class="lbl">Component One</label>
+        </div>
+        <div class="col-sm-3 padTxtTop">
+            {{JoinModal.Component}}
+        </div>
+        <div class="col-sm-2 padTxtTop">
+            <label class="lbl">Component Two</label>
+        </div>
+        <div class="col-sm-4">
+            <ng-select class="selectStyle"
+            [items]="JoinModal.CompNames"
+            bindLabel="Value"
+            placeholder="Please select a Component"
+            bindValue="Id"
+            clearable="true"
+            [(ngModel)]="JoinModal.JoinCompId"          
+            clearAllText="Clear">
+        </ng-select>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn btn-info btn-sm" (click)="CompTwoChange()" >+</button>
+        </div>
+  </div>
+  <ng-container *ngFor="let jm of JoinModal.JoinCriteria;let j - index">
+           
+    <div class="row padTxtTop" style="margin-top:20px; margin-bottom:20px;" >
+      <div class="col-sm-1"  *ngIf="JoinModal.IsMerge">&nbsp;</div>
+      <div class="col-sm-3" *ngIf="JoinModal.IsMerge">
+        <label class="lbl">{{jm.CompOneDisplay}}</label>
+      </div>
+
+      <div class="col-sm-5" *ngIf="!JoinModal.IsMerge">
+        <ng-select 
+            class="selectStyle"
+            [items]="jm.ComponentOneHeaders"
+            bindLabel="Value"
+            [(ngModel)]="jm.CompOneSelected"
+            placeholder="Please select ComponentOne Field"
+            bindValue="Id"
+            clearable="true"          
+            clearAllText="Clear">
+            </ng-select>
+      </div>
+
+        <div class="col-sm-5">
+            <ng-select 
+            class="selectStyle"
+            [items]="jm.ComponentTwoHeaders"
+            bindLabel="Value"
+            [(ngModel)]="jm.CompTwoSelected"
+            placeholder="Please select ComponentTwo Field"
+            bindValue="Id"
+            clearable="true"          
+            clearAllText="Clear">
+            </ng-select>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn btn-info btn-sm crossBtn" (click)="onJoinCondition(jm)">x</button> 
+         </div>
+    </div>
+  </ng-container>
+  <div class="row" *ngIf="JoinVisible">
+    <div class="col-sm-10"></div>
+    <div class="col-sm-2">
+      <button type="button" class="btn btn btn-info btn-sm" (click)="Join()" >{{_joinModalDto.ModalHeader}}</button>
+       
+    </div>
+  </div>
+  

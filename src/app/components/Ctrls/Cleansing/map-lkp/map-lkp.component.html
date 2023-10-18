@@ -1,0 +1,76 @@
+<div class="modal-header bg-dark modal-lg">
+    <h4 class="modal-title modalTitle" id="modal-basic-title">{{MapModalDto.ModalHeader}} Component</h4>
+    <button type="button" class="close modalClose" aria-label="Close" (click)="Close()">
+      <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <div class="row" style="font-size:11px;">
+          
+        <div class="col-sm-1 padTxtTop" style="font-weight: bold;">
+            Map
+        </div>
+        <div class="col-sm-3 padTxtTop" >
+            {{MapModalDto.Component}} ({{MapModalDto.CompOneColName}})
+        </div>
+        <div class="col-sm-2 padTxtTop" style="font-weight: bold;">
+            <label class="lbl">Component Two</label>
+        </div>
+        <div class="col-sm-4">
+            <ng-select class="selectStyle"
+            [items]="MapModalDto.CompNames"
+            bindLabel="Value"
+            placeholder="Please select a Component"
+            bindValue="ComponentId"
+            clearable="true"
+            [(ngModel)]="MapModalDto.JoinCompId"          
+            clearAllText="Clear">
+        </ng-select>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn btn-info btn-sm" (click)="CompTwoChange()">+</button>
+        </div>
+  </div>
+
+  <div class="row" *ngIf="MapVisible" style="font-size:11px;margin-top:20px; margin-bottom:20px;">
+    <div class="col-sm-2 padTxtTop">
+        Map Column
+    </div>
+
+    <div class="col-sm-4">
+        <ng-select class="selectStyle"
+        [items]="MapModalDto.CompTwoNames"
+        bindLabel="Value"
+        placeholder="Please select a Map Column"
+        bindValue="Id"
+        clearable="true"
+        [(ngModel)]="MapModalDto.MapColumn"          
+        clearAllText="Clear">
+        </ng-select>
+    </div>
+
+    <div class="col-sm-2 padTxtTop" >
+        Value Column
+    </div>
+    <div class="col-sm-4">
+        <ng-select class="selectStyle"
+        [items]="MapModalDto.CompTwoNames"
+        bindLabel="Value"
+        placeholder="Please select a Value Column"
+        bindValue="Id"
+        clearable="true"
+        [(ngModel)]="MapModalDto.ValueColumn"          
+        clearAllText="Clear">
+        </ng-select>
+    </div>
+</div>
+
+<div class="row" *ngIf="MapVisible">
+    <div class="col-sm-9"></div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn btn-info btn-sm" (click)="Map()" >Map Column</button>
+       
+    </div>
+</div>
+

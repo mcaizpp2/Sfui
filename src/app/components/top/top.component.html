@@ -1,0 +1,93 @@
+<ng-template #confirm let-modal>
+  <div class="modal-header bg-dark modal-lg">
+    <h4 class="modal-title modalTitle" id="modal-basic-title">Confirm LogOut</h4>
+    <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <div class="row padTxtTop">
+          <div class="col-sm-12">
+          Are you sure sure you wish to logout - {{User.userName}} ?
+          </div>
+      </div>
+    <div class="row padTxtTop margTop">
+      <div class="col-sm-3">
+        <button class="btn-sm btn-success btn-outline-rounded btn-info"  (click)="Confirm()">Log Out</button>
+      </div>
+
+      <div class="col-sm-3">
+        <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+  
+   <nav class="navbar navbar-expand-lg bgGloss fixed-top marg padBot" id="mainNav">
+    <app-bar [value]="Progress"></app-bar> 
+
+      <a class="navbar-brand js-scroll-trigger fnt" [routerLink]="['/']" >MORPH</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item dropdown">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn-sm btn-info btnMarg margTop btnRadius" id="dropdownMenuButton" ngbDropdownToggle>
+                Tools
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownMenuButton"  class="drpMenu" style="background-color:#117a8b">
+                <button ngbDropdownItem class="cmbItems"  [routerLink]="['/cleanse']">Cleanser</button>
+                <button ngbDropdownItem class="cmbItems" [routerLink]="['/compare']" >Compare files</button>
+                <button ngbDropdownItem class="cmbItems" [routerLink]="['/viewEncoders']" >Encoders</button>
+             
+              </div>
+            </div>
+          </li> 
+
+
+          <li class="nav-item dropdown" *ngIf="isAdmin">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn-sm btn-info btnMarg margTop btnRadius" id="dropdownMenuButton" ngbDropdownToggle>
+                Admin
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownMenuButton"  class="drpMenu" style="background-color:#117a8b">
+                <button ngbDropdownItem class="cmbItems"  [routerLink]="['/users']">Users</button>
+                <button ngbDropdownItem class="cmbItems" [routerLink]="['/mi']" >MI Admin</button>
+                <button ngbDropdownItem class="cmbItems" [routerLink]="['/changed']" >User Inputs</button>
+              </div>
+            </div>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" [ngClass]="{'activeLink': Router.url === '/manager'}" [routerLink]="['/manager']">Manager</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" [ngClass]="{'activeLink': Router.url === '/import'}" [routerLink]="['/import']" >Import</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" [ngClass]="{'activeLink': Router.url === '/mappingNew'}" [routerLink]="['/mappingNew']">Map Fields</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" [ngClass]="{'activeLink': Router.url === '/locations'}" [routerLink]="['/locations']">Locations</a>
+          </li>
+
+          <li class="nav-item" *ngIf="isLogged" title="Sign Out">
+          <i class="fa fa-sign-out logOut " aria-hidden="true"   (click)="LogOut()">
+
+          </i>
+          
+          </li>
+        </ul>
+        
+      </div>
+
+  </nav> 
+
+
+
+

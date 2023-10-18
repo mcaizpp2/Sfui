@@ -1,0 +1,93 @@
+<div class="sectionHeader">
+    <ng-template #termTemplate let-modal>
+        <div class="modal-header bg-dark modal-lg">
+          <h4 class="modal-title modalTitle" id="modal-basic-title">Add Term</h4>
+          <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <form [formGroup]="TermForm">
+          <div class="row">
+            <div class="col-sm-1">
+                <label class="padTop">Term</label>
+            </div>
+            <div class="col-sm-5">
+                <input type="text" class="form-control txtSmall" name="name" formControlName="name"  />
+            </div>
+          </div>
+
+          <div class="row padTop margTop">
+            <div class="col-sm-3">
+              <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!TermForm.valid" (click)="SaveTerm()"> Add Term </button>
+            </div>
+          </div>
+        </form>
+    </div>
+    
+    </ng-template>
+
+    <ng-template #confirmTemplate let-modal>
+      <div class="modal-header bg-dark modal-lg">
+        <h4 class="modal-title modalTitle" id="modal-basic-title">Delete Staging Value</h4>
+        <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+  
+          <div class="row padTxtTop">
+              <div class="col-sm-12">
+                Are you sure you wish to delete the Staging Value?
+              </div>
+          </div>
+        <div class="row padTxtTop margTop">
+          <div class="col-sm-3">
+            <button class="btn-sm btn-success btn-outline-rounded btn-info"  (click)="Confirm()"> Confirm </button>
+          </div>
+  
+          <div class="col-sm-3">
+            <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Cancel()">Cancel</button>
+          </div>
+        </div>
+      </div>
+  
+    </ng-template>
+
+
+    <div class="sectionContent sectionTop padBtmBtns" *ngIf="HasLoaded">
+        <div class="row lnHeight tblMargin">
+            <ag-grid-angular
+                style="width: 902px;"
+                class="ag-theme-balham marg"
+                [rowData]="LoadVals"
+                [columnDefs]="ColumnDefs"
+                [gridOptions]="Options"
+                (gridReady)="onGridReady($event)"
+                (selectionChanged)="onSelectionChanged()"                
+                [rowSelection]="RowSelection">
+            </ag-grid-angular>
+        </div>
+    </div>
+ 
+    <div class="sectionContent sectionTop margBtm" *ngIf="ShowTestTerms">
+        <div class="row lnHeight tblMargin">
+          <div class="col-sm-8">
+            <ag-grid-angular
+                style="width: 802px;"
+                class="ag-theme-balham marg"
+                [rowData]="TestTerms"
+                [columnDefs]="TestTermsColumnDefs"
+                [gridOptions]="TestOptions"
+                (gridReady)="onTestGridReady($event)"
+                [rowClassRules]="rowClassRules"
+                [rowSelection]="RowSelection">
+            </ag-grid-angular>
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-info btn-square btn-sm margLeft" (click)="AddTerm()">Add</button>
+            <button class="btn btn-info btn-square btn-sm margLeft" (click)="Stage()">Test</button>
+            <button *ngIf="ShowCommit" class="btn btn-info btn-square btn-sm margLeft" (click)="Commit()">Commit</button>
+          </div>
+        </div>
+    </div>

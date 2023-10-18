@@ -1,0 +1,60 @@
+:host {
+    background-color: rgb(0, 0, 0);
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 0px !important;
+    padding: 0 !important;
+    border-radius: 3px 3px 3px 3px;
+    pointer-events: all;
+    cursor: pointer;
+  
+    
+}
+
+:host.border-info{
+  border-top:4px solid #04c4f3;
+}
+:host.border-green{
+  border-top: 4px solid #51d21a; 
+}
+:host.border-red{
+  border-top: 4px solid red;
+}
+
+.size
+{
+  font-size:14px !important;
+}
+
+.toContainer
+{
+    background-color: black;
+    width:100%;
+    margin-top :2px;
+    padding-top:10px;
+    font-size:14px !important;
+
+}
+
+.toast-container .ngx-toastr
+{
+    padding: 0 !important;
+    margin :0 !important;
+}
+
+
+
+.custom-title-blue{
+    color: #04c4f3 !important;
+}
+
+.custom-title-green{
+    color: #51d21a;
+}
+.custom-title-red{
+    color: red;
+}
+.custom-message{
+color: #FFF;
+}
+

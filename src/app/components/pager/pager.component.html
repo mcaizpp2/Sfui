@@ -1,0 +1,23 @@
+
+<div class="row main" style=" margin: 0 auto;" *ngIf="Paging != null">
+<div class="col-xs-2 txt">{{Paging.recFirst}} to {{Paging.recLast}} of {{Paging.total}}
+
+    <button type="button"
+    class="btn bthLink" style="margin-left:14px;"
+    [disabled]="IsPageLast()"
+    (click)="First()"><<</button>
+
+<button type="button" class="btn bthLink" [disabled]="IsPagePrevious()"
+(click)="Previous()"><</button>
+</div>
+<div class="col-x-1 txt" style="margin-left:6px;">Page {{Paging.current}} Of {{Paging.totalPages}}</div>
+
+<div class="col-xs-2" style="margin-right:10px"><button type="button"  (click)="Next()"
+    class="btn bthLink"
+    [disabled]="IsPageNext()">>
+</button>
+<button type="button" [disabled]="IsPageFinal()"
+    class="btn bthLink" (click)="Last()"
+    >>></button>
+</div>
+</div>

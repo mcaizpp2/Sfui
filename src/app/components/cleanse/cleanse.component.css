@@ -1,0 +1,158 @@
+
+
+.cog
+{
+  background-color: black;
+  color:#FFF;
+}
+.bacBlk
+{
+  background-color: #000;
+  width:16px;
+}
+
+.whiteCog
+{
+  color:#FFF !important;
+}
+
+  .btnWdth
+  {
+    width:50px;
+    height:28px;
+  }
+
+  .gldCol
+  {
+    color:#fed136;
+  }
+
+  .margLeft
+  {
+    margin-left:14px;
+  }
+
+  .mrg
+  {
+    margin-right:2px;
+    margin-left:2px;
+  }
+
+  .mrgBtm
+  {
+    margin-bottom: 7px;
+  }
+  .overFlow
+  {
+    overflow:auto;width:100%;
+  }
+
+  .comHeader
+  {
+    background-color: black;
+    color:#fed136;
+    font-weight:bold;
+    font-size: 10px;
+  }
+  .OpHeader
+  {
+    background-color: black;
+    color:#FFF;
+    font-weight:bold;
+    font-size: 11px;
+  }
+
+  .colRed
+  {
+    color: red;
+    font-size:20px;
+    text-align: center;
+  }
+
+  .colAmber
+  {
+    color:rgb(240, 131, 42);
+    font-size:20px;
+    text-align: center;
+  }
+
+  
+
+  .tdWidth
+  {
+    white-space: nowrap;
+  }
+
+  .blk
+  {
+    color: #000;
+    text-align: center;
+    margin-right:10px;
+    margin-bottom: 4px;
+  }
+  .tdNoBrd
+  {
+    border:none;
+  }
+
+  .excelTitle
+  {
+    font-weight:bold;
+    background-color: grey !important;
+    color:white  !important;
+    font-size: 10px;
+  }
+
+  .excelTotal
+  {
+    font-weight:bold;
+    background-color: rgb(235, 144, 70) !important;
+    color:white  !important;
+  }
+
+  .rowStyle
+  {
+    background-color: white;
+    color: black;
+    font-size:10px;
+   
+  }
+
+  .thBrd
+  {
+      border-bottom: 1px solid #dee;
+      border-right: 1px solid #dee;
+  }
+
+  .colStyleCnt
+  {
+      min-width:160px;
+      color: #fed136;
+      text-align: center;
+      font-weight:bold;
+      font-size:12px;
+  }
+
+
+  .mat-menu-item
+  {
+    border: none;
+    border-color: transparent !important;
+    height: 24px ;
+    line-height: 24px;
+    font-size: 10px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+
+  .disabled {
+    pointer-events:none;
+    opacity:.5;
+   }
+
+   .opRow
+   {
+     font-size:11px;
+   }
+
+   tr:nth-child(even) {background: #e7e7e7!important}
+   tr:nth-child(odd) {background: #FFF !important}

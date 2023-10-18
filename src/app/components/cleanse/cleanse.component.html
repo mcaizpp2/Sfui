@@ -1,0 +1,235 @@
+<ng-template #joinTemplate let-modal>
+    <app-join [JoinModal]="JoinModalDto" [Components]="Components" (JoinComplete)="JoinComplete($event)"></app-join>
+</ng-template>
+
+<ng-template #mapTemplate let-modal>
+    <app-map-lkp [MapModal]="MapLkpDto" [Components]="Components" (MapComplete)="MapComplete($event)"></app-map-lkp>
+</ng-template>
+
+<div id="OpHistory" class="OpHistory">
+    <button type="button" class="close modalClose closebtn" aria-label="Close" (click)="CloseOpHistory()">
+      <span aria-hidden="true" style="font-size: 14px;">×</span>
+    </button>
+    <h4 class="modal-title modalTtle header" id="modal-basic-title">Operation History</h4>
+    <div class="modal-body">
+        <table class="" >
+            <tr  class="componentTr" style="background-color:black;">
+                <td class="OpHeader componentTd">
+                    Operation
+                </td>   
+                <td class="OpHeader componentTd">
+                    Sheet
+                </td> 
+                <td class="OpHeader componentTd">
+                    Comp
+                </td>   
+                <td class="OpHeader componentTd">
+                    Field
+                </td>
+                <td class="componentTd OpHeader">&nbsp; </td>                     
+            </tr>
+            <ng-container *ngFor="let op of Operations;let j - index">
+                <tr class="componentTr">
+                
+                        <td class="componentTd opRow">{{op.operationType.name}}</td>
+                    
+                        <td class="componentTd opRow">{{op.workSheet}}</td>
+                   
+                        <td class="componentTd opRow">{{op.component}}</td>
+
+                        <td class="componentTd opRow">{{op.fieldName}}</td>
+
+                        <td>
+                            <button type="button" class="close modalClose blk" aria-label="Close" (click)="DeleteOp(op.operationsId)">
+                                <span aria-hidden="true" style="font-size: 11px;">×</span>
+                            </button>
+                        </td>
+
+                </tr>
+            </ng-container>
+        </table>
+    </div>
+</div>
+
+<ng-template #validationsTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+        <h4 class="modal-title modalTitle" id="modal-basic-title">Join Validation Errors</h4>
+        <button type="button" class="close modalClose" aria-label="Close" (click)="Close()">
+          <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="table table-striped tblMargin">
+            <thead>
+                <tr>
+                <th style="width: 100px;" class="customth">Type</th>
+                <th style="width: 98px;" class="customth">Row Idx</th>
+                <th style="width: 400px;"class="customth">Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let val of Validations;let i - index">
+                    <tr>
+                        
+                        <td class="td" style="font-size:14px; text-align:center" >
+                            <i class="fa fa-exclamation-triangle colRed" aria-hidden="true" *ngIf="val.type == 0"></i>
+                            <i class="fa fa-exclamation-circle colAmber" aria-hidden="true" *ngIf="val.type == 1"></i>
+                        </td>
+                        <td class="td" style="font-size:14px">{{val.rowIdx}}</td>
+                        <td class="td" style="font-size:14px" [innerHTML]="val.message">{{val.message}}</td>
+                    </tr>
+                </ng-container>         
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn btn-info btn-sm" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+
+
+<div style="visibility: hidden; position: fixed"
+    [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y"
+    [matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu">
+	<ng-template matMenuContent>
+		<button mat-menu-item
+        *ngIf="MenuOption.Remove.visible"
+        (click)="onColContext(MenuOption.Remove)" 
+        [ngClass]="{ 'disabled' : !MenuOption.Remove.enabled }">
+        Remove</button>
+        <button mat-menu-item 
+        *ngIf="MenuOption.Split.visible"
+        (click)="onColContext(MenuOption.Split)"
+         [ngClass]="{ 'disabled' : !MenuOption.Split.enabled }">Split</button>
+         
+         <button mat-menu-item 
+        *ngIf="MenuOption.Map.visible"
+        (click)="onMapUnion(MenuOption.Map)"
+         [ngClass]="{ 'disabled' : !MenuOption.Map.enabled }">Map Lkp Column</button>
+        
+
+        <button mat-menu-item 
+        *ngIf="MenuOption.AddOrigin.visible" 
+        (click)="onCompContext(MenuOption.AddOrigin)"
+        [ngClass]="{ 'disabled' : !MenuOption.AddOrigin.enabled }"
+        >Set Origin</button>
+        <button mat-menu-item
+        *ngIf="MenuOption.RemoveComponent.visible"
+        [ngClass]="{ 'disabled' : !MenuOption.RemoveComponent.enabled }"
+        (click)="onCompContext(MenuOption.RemoveComponent)">Remove</button>
+        <button mat-menu-item
+        *ngIf="MenuOption.Join.visible"
+        [ngClass]="{ 'disabled' : !MenuOption.Join.enabled }"
+        (click)="onCompJoinContext(MenuOption.Join)">Join</button>
+
+        <button mat-menu-item
+        *ngIf="MenuOption.RemoveRow.visible"
+        [ngClass]="{ 'disabled' : !MenuOption.RemoveRow.enabled }"
+        (click)="onCompContext(MenuOption.RemoveRow)">Remove Row</button>
+    
+        <button mat-menu-item
+        *ngIf="MenuOption.Union.visible"
+        [ngClass]="{ 'disabled' : !MenuOption.Union.enabled }"
+        (click)="onCompUnion(MenuOption.Union)">Union</button>
+
+        <button mat-menu-item
+        *ngIf="MenuOption.AddHeader.visible"
+        [ngClass]="{ 'disabled' : !MenuOption.AddHeader.enabled }"
+        (click)="onCompContext(MenuOption.AddHeader)">Header Row</button>
+
+        <button mat-menu-item
+        *ngIf="MenuOption.SetHeader.visible"
+        [ngClass]="{ 'disabled' : !MenuOption.SetHeader.enabled }"
+        (click)="onCompContext(MenuOption.SetHeader)">Set Header</button>
+    </ng-template>
+</mat-menu>
+
+
+<div class="sectionHeader">
+    <div class="sectionContent">
+        
+        <nav class="navLeft">
+            <div class="nav nav-tabs mrg" id="nav-tab" role="tablist">
+                <ng-container *ngFor="let cleansed of CleanedDtos;let i - index">    
+                    <button class="active nav-link active" data-toggle="tab" (click)="SetComponents(cleansed.workSheet)">{{cleansed.workSheet}}</button>
+                </ng-container>
+                <button class="btn btn-info btn-square btn-sm btnWdth margLeft" 
+                (click)="ShowOpHistory()">Op History</button>
+                <button class="btn btn-info btn-square btn-sm btnWdth margLeft" 
+                *ngIf="Export" (click)="ExportCleaned()">Export</button>
+           
+            </div>
+        </nav>
+        
+    </div>
+    <div class="sectionContent sectionTop">
+        <div class="mrgRight overFlow" style="border:none;border-left:none;">
+           
+           <!-- <table class="tblComponents tblMargin" style="margin-bottom:10px;border-top: none;border-left:none !important; border-right: none;border-bottom:none; font-size:10px" >
+                <tr>
+                    <td style="border-bottom: none !important;border-left:none;border-right:none;">
+                    -->
+                    <div  class="col-sm-12">
+                     <ng-container *ngFor="let com of Components;let i - index">
+                      
+                            <table class="tblComponents tblMargin" style="table-layout:auto !important;" >
+                                <tr *ngIf="!com.processed" class="componentTr" style="background-color:black;height: 20px;width:100%">
+                                    <td class="comHeader componentTd bacBlk">
+                                        <i class="fa fa-cog whiteCog" (click)="onComClick($event, com)"></i>
+                                    </td>
+                                    <td class="comHeader componentTd" [attr.colspan]="com.cellCount">
+                                        {{com.name}}<b *ngIf="com.isOrigin"> (origin)</b>
+                                    </td>                       
+                                </tr>
+                                <ng-container *ngFor="let row of com.rows;let j - index">
+                                    <tr style="height: 20px;width:100%" class="componentTr">
+                                        <td class="bacBlk" *ngIf="!com.processed">
+                                            <i class="fa fa-cog whiteCog gldCol"  (click)="onRowClick($event, row, com)"></i>
+                                        </td>
+                                        <!--<td *ngIf="com.processed">&nbsp;</td>-->
+                                        <ng-container *ngFor="let cell of row.cells;let v - index" >
+                                           
+                                            <td class="rowStyle componentTd" 
+                                            *ngIf="!IsHeader(row.row) && !IsExport()" 
+                                            [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}">
+                                            {{cell.cellValue}}</td>
+                                        
+                                            <td class="rowStyle componentTd" 
+                                            *ngIf="IsExport() && IsHeader(row.row)" 
+                                            class="excelTitle">
+                                            {{cell.cellValue}}</td>
+
+                                            <td class="rowStyle componentTd" 
+                                            *ngIf="IsExport() && !IsHeader(row.row)"
+                                            [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}">
+                                            {{cell.cellValue}}</td> 
+
+                                            <td class="rowStyle componentTd" 
+                                           
+                                            *ngIf="IsHeader(row.row) && !IsExport()" 
+                                           
+                                            [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}"
+                                            >{{cell.cellValue}}
+                                            <i class="fa fa-square gldCol" (click)="onColRightClick($event, cell, com)"></i>
+                                        </td>
+                                       
+                                        
+                                        </ng-container>
+                                        
+                                    </tr>
+
+                                </ng-container>
+                            </table>
+                              
+                        </ng-container>
+                        <div style="height:10px;"></div>
+                    </div>
+                    <!--</td>
+                </tr>
+            </table>-->    
+    </div>
+</div>

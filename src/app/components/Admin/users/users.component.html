@@ -1,0 +1,118 @@
+<ng-template #userTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">{{Operation}} User</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="UserForm">
+      <div class="row">
+        <div class="col-sm-2">
+            <label class="padTop">Name</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control txtSmall" name="name" formControlName="name"  />
+        </div>
+        <div class="col-sm-2">
+            <label class="padTop">Uid</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control txtSmall" name="userName" formControlName="userName"  />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2 padTop">
+            <label class="padTop">Company</label>
+        </div>
+        <div class="col-sm-4 padTop">
+            <ng-select class="selectStyle"
+                [items]="Clients"
+                bindLabel="client"
+                placeholder="Please select a Company"
+                bindValue="clientId"
+                clearable="true"
+                formControlName="client"
+                clearAllText="Clear">
+            </ng-select>
+        </div>
+        <div class="col-sm-2 padTop">
+            <label class="padTop">Type</label>
+        </div>
+        <div class="col-sm-4 padTop">
+            <ng-select class="selectStyle"
+                [items]="UserTypes"
+                bindLabel="userType"
+                placeholder="Please select a User Type"
+                bindValue="userTypeId"
+                clearable="true"
+                formControlName="userType"
+                clearAllText="Clear">
+            </ng-select>
+        </div>
+      </div>
+
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!UserForm.valid" (click)="Save()"> Save </button>
+        </div>
+      </div>
+      </form>
+      </div>
+
+</ng-template>
+
+  <ng-template #confirmTemplate let-modal>
+    <div class="modal-header bg-dark modal-lg">
+      <h4 class="modal-title modalTitle" id="modal-basic-title">{{ConfirmTitle}}</h4>
+      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="row padTxtTop">
+            <div class="col-sm-12">
+              {{Question}}
+            </div>
+        </div>
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info"  (click)="Confirm()"> Confirm </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+
+<div class="sectionHeader">
+    <div class="sectionContent">
+        <div class="row padBtmBtns padBtnLeft">
+            <div class="col-sm-2">
+              <button class="btn btn-info btn-square btn-sm margLeft" (click)="Add()" >Add</button>
+              <button class="btn btn-info btn-square btn-sm margLeft wdth" (click)="ResetPwd()" [disabled]="!GridUserSelected" >Reset Pwd</button>
+              <button class="btn btn-info btn-square btn-sm margLeft wdth" (click)="Delete()" [disabled]="!GridUserSelected" >Delete</button>
+            </div>
+        </div>
+
+    <div class="sectionContent sectionTop" *ngIf="HasLoaded">
+        <div class="row lnHeight tblMargin">
+            <ag-grid-angular
+                style="width: 1103px;"
+                class="ag-theme-balham marg"
+                [rowData]="Users"
+                [columnDefs]="ColumnDefs"
+                [gridOptions]="Options"
+                (gridReady)="onGridReady($event)"
+                (selectionChanged)="onSelectionChanged()"
+                (cellDoubleClicked)='onCellClicked($event)'
+                [rowSelection]="RowSelection">
+            </ag-grid-angular>
+        </div>
+    </div>
+</div>
