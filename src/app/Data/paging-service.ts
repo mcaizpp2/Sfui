@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { environment } from "../../environments/environment";
@@ -22,9 +22,9 @@ export class PagingService extends ApiBase {
     public async Page(pagingRequest : PagingRequest): Promise<PagingResponse> 
     {
         var requestPayLoad : string = JSON.stringify(pagingRequest);
-        let formData: FormData = new FormData();
-        formData.append('request', requestPayLoad);
-        var response = await this._http.post(API_URL + 'api/Paging/Page', formData)
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+        var response = await this._http.post(API_URL + 'api/Paging/Page', requestPayLoad, { headers: headers })
         .toPromise()
         .then(x=> x as PagingResponse)
         this.ProcessResponse(response);
