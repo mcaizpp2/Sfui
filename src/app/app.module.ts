@@ -64,7 +64,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 import { JoinComponent } from './components/Ctrls/Cleansing/Component/join/join.component';
 import { MapLkpComponent } from './components/Ctrls/Cleansing/map-lkp/map-lkp.component';
-import { MainComponent } from './SmartyPants/main/main.component'; 
 import { SignalRService } from './Services/signal-rservice';
 import { EncodersComponent } from './components/Templates/encoders/encoders.component';
 import { ViewEncodersComponent } from './components/Templates/view-encoders/view-encoders.component';
@@ -75,12 +74,7 @@ const appRoutes: Routes = [
     component : ManagerComponent,
     canActivate: [AuthGuard] 
   },
-  {
-    path: 'smarty',
-    pathMatch: 'full',
-    component: MainComponent,
-    canActivate: [AuthGuard]
-  },
+ 
   { path: '',
     pathMatch: 'full',
     component : ManagerComponent,
@@ -186,7 +180,6 @@ const appRoutes: Routes = [
     ContextMenuComponent,
     JoinComponent,
     MapLkpComponent,
-    MainComponent,
     EncodersComponent,
     ViewEncodersComponent
   ],
