@@ -44,3 +44,13 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/.vs/slnx.sqlite
+/.vs/slnx.sqlite-journal
+/.vs/VSWorkspaceState.json
+/.vs/Sfui/v17/.wsuo
+/.vs/Sfui/v17/workspaceFileList.bin
+/.vs/Sfui/FileContentIndex/782c33c9-4cba-4698-bd9c-1acce479255f.vsidx
+/.vs/Sfui/FileContentIndex/a5240155-4bd3-481e-b7a3-db8199e342d0.vsidx
+*.vsidx
+/.vs/Sfui/FileContentIndex/fc8d40bd-c8da-4a36-b0b0-9e0075dcc931.vsidx
+*.lock
