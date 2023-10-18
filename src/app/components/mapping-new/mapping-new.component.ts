@@ -76,14 +76,14 @@ export class MappingNewComponent implements OnInit, AfterViewInit {
     let i = 1;
     if (colMapResponse.status)
     {
-      colMapResponse.suggestionsNew.forEach(x=>
+      colMapResponse.suggestions.forEach(x=>
       {
         x.displayField = x.header.header + " : " + x.selected.name;
         x.id = i;
         i++;
       });
 
-      this.Suggestions = colMapResponse.suggestionsNew;
+      this.Suggestions = colMapResponse.suggestions;
       this.Headers = colMapResponse.headers;
 
       this.ConfigValidations();

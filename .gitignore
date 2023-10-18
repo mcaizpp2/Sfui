@@ -60,3 +60,6 @@ Thumbs.db
 /src/.vs/VSWorkspaceState.json
 /src/.vs/slnx.sqlite
 /src/.vs/src/config/applicationhost.config
+/.vs/slnx.sqlite
+/dist/sfui
+/src/environments/environment.ts

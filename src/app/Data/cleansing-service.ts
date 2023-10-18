@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { environment } from "../../environments/environment";
@@ -71,10 +71,10 @@ export class CleansingService extends ApiBase {
       public async Load(cleanLoadRequest : CleanLoadRequest) : Promise<CleanLoadResponse>
       {
         var requestPayLoad : string = JSON.stringify(cleanLoadRequest);
-        let formData: FormData = new FormData();
-        formData.append('request', requestPayLoad);
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
-        var response = await this._http.post(API_URL + 'api/Cleanse/Load', formData)
+        var response = await this._http.post(API_URL + 'api/Cleanse/Load', requestPayLoad, { headers: headers })
         .toPromise()
         .then(x=> x as CleanLoadResponse)
     
@@ -123,10 +123,10 @@ export class CleansingService extends ApiBase {
       public async Get(request : GetCleansedMgrRequest) : Promise<GetCleansedMgrResponse>
       {
         var requestPayLoad : string = JSON.stringify(request);
-        let formData: FormData = new FormData();
-        formData.append('request', requestPayLoad);
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
-        var response = await this._http.post(API_URL + 'api/Cleanse/Get', formData)
+        var response = await this._http.post(API_URL + 'api/Cleanse/Get', requestPayLoad, { headers: headers })
         .toPromise()
         .then(x=> x as GetCleansedMgrResponse)
     
