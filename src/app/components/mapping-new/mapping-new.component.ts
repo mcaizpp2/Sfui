@@ -277,10 +277,12 @@ export class MappingNewComponent implements OnInit, AfterViewInit {
   {
     this._messagingService.LoadingMsg(true);
     var conversion = this._conversionService.Get();
+    debugger;
     conversion.geoCode = this.GeoCode;
 
     var response = await this._mappingBl.SaveMapping(this.MappingHeaders, conversion);
 
+    debugger;
     if (response.status)
     {
       conversion.rmsFieldMappingsDto = response.rmsFieldMappingsDto;

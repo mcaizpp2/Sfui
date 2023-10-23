@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { MediatorService } from "../Services/mediator.service";
 import { ToastrService } from "ngx-toastr";
 import { ApiBase } from "./api-base";
@@ -52,11 +52,11 @@ export class MappingService extends ApiBase {
   public async SaveMappings(request : SaveConversionMappingsRequest) : Promise<SaveConversionMappingsResponse>
   {
     var requestPayLoad : string = JSON.stringify(request);
-    let formData: FormData = new FormData();
-    formData.append('request', requestPayLoad);
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
  
-    var response = await this._http.post(API_URL + 'api/ColMap/Save', formData)
+    var response = await this._http.post(API_URL + 'api/ColMap/Save', requestPayLoad, { headers: headers })
     .toPromise()
     .then(x=> x as SaveConversionMappingsResponse)
 

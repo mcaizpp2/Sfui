@@ -1,4 +1,4 @@
-﻿@import '../node_modules/@ng-select/ng-select/themes/default.theme.css';
+@import '../node_modules/@ng-select/ng-select/themes/default.theme.css';
 @import "../node_modules/ag-grid-community/dist/styles/ag-grid.min.css";
 @import "../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css";
 @import '../node_modules/ngx-toastr/toastr.css';
@@ -447,8 +447,7 @@ table {
 
 
  .componentTr {
- /* border: 0px solid transparent;
-  border-top : 0px !important;*/
+
   text-align: left;
   font-size: 12px;
   
@@ -1285,4 +1284,3 @@ div.ag-root .ag-cell-focus {
 
 
 
-  
