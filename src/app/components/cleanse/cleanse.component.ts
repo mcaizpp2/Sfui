@@ -477,11 +477,13 @@ constructor(private _cleansingBl : CleansingBl,
     var response = await this._cleansingBl.Load(this._cleanseMgrId, show);
     var cleaned = response.cleanedDtos;
     cleaned.push(response.processed);
-    debugger;
+
     var cleansed = response.cleanedDtos[0];
     this.CleanedDtos = response.cleanedDtos;
     this.SetComponents(cleansed.workSheet);
 
+    this.JoinSheets = [];
+    this.JoinComps = [];
     response.cleanedDtos.forEach(x => {
       this.JoinSheets.push(new JoinSheet({ workSheetId: x.workSheetId, name: x.workSheet }));
 
