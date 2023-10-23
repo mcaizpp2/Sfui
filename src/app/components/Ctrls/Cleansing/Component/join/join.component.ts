@@ -5,6 +5,9 @@ import { JoinCriteria } from '../../../../../Models/Dtos/Cleansing/join-criteria
 import { JoinModalDto } from '../../../../../Models/Dtos/Cleansing/join-modal-dto';
 import { RowTypeDto } from '../../../../../Models/Dtos/Cleansing/row-type-dto';
 import { StrLookupDto } from '../../../../../Models/Dtos/str-lookup-dto';
+import { JoinComp } from '../../../../../Models/Dtos/join-comp';
+import { JoinSheet } from '../../../../../Models/Dtos/join-sheet';
+import { CleanedWsDto } from '../../../../../Models/Dtos/Cleansing/cleanedWs-dto';
 
 @Component({
   selector: 'app-join',
@@ -13,14 +16,32 @@ import { StrLookupDto } from '../../../../../Models/Dtos/str-lookup-dto';
 })
 export class JoinComponent implements OnInit {
   public _joinModalDto : JoinModalDto;
-  private _components : ComponentsDto[];
+  private _components: ComponentsDto[];
+  private _joinComps: JoinComp[];
+  public _joinSheets: JoinSheet[];
 
-  public HasJoins : false;
+  public _joinCompsTwo: JoinComp[] = [];
+
+  public ComponentOne: JoinComp;
+  public ComponentOneWs: JoinSheet;
+
+  public ComponentTwoWsIdx: number;
+  public ComponentTwoIdx: number;
+
+  public ComponentWs: string;
+  public HasJoins: false;
+  public CompTwoWsId: number;
+  private _lstCleanedWs: CleanedWsDto[];
   constructor(private _modalService: NgbModal) { }
 
+ 
   @Input() set JoinModal(value: JoinModalDto) {
 
     this._joinModalDto = value;
+  }
+  @Input() set CleanedWs(value: CleanedWsDto[]) {
+    debugger;
+    this._lstCleanedWs = value;
   }
 
   get JoinModal(): JoinModalDto{
@@ -28,8 +49,15 @@ export class JoinComponent implements OnInit {
     return this._joinModalDto;
   }
 
+  @Input() set JoinComps(value: JoinComp[]) {
+    this._joinComps = value;
+  }
+
+  @Input() set JoinSheets(value: JoinSheet[]) {
+    this._joinSheets = value;
+  }
+
   @Input() set Components(value: ComponentsDto[]) {
-    debugger;
     this._components = value;
   }
 
@@ -38,6 +66,10 @@ export class JoinComponent implements OnInit {
   public JoinVisible : boolean;
 
   ngOnInit(): void {
+    debugger;
+    this.ComponentOne = this._joinComps.find(x => x.compIdx == this._joinModalDto.ComponentId);
+    this.ComponentOneWs = this._joinSheets.find(x => x.workSheetId == this.ComponentOne.workSheetId);
+    debugger;
   }
 
   public Close()
@@ -76,31 +108,36 @@ export class JoinComponent implements OnInit {
 
   }
 
-  private HandleMerge(components : ComponentsDto[])
-  {
-    var componentOneRow = components[0].rows[0];
+  private HandleMerge(components: ComponentsDto[]) {
+    debugger;
+    var selectedComponentOneWs = this._lstCleanedWs.find(x => x.workSheetId == this.ComponentOneWs.workSheetId);
+    var selectedComponentOne = selectedComponentOneWs.components.find(x => x.componentId == this.ComponentOne.compIdx);
+    var componentOneRow = selectedComponentOne.rows[0];
     var componentOneHeaders = this.SetCompNames(componentOneRow);
 
     var ignore = new StrLookupDto
-    (
-      {
-        Id : -1,
-        Value : "Ignore"
-      }
-    );
+      (
+        {
+          Id: -1,
+          Value: "Ignore"
+        }
+      );
 
-    var componentTwoRow = components[1].rows[0];
+
+    var selectedComponentTwoWs = this._lstCleanedWs.find(x => x.workSheetId == this.ComponentTwoWsIdx);
+    var selectedComponentTwo = selectedComponentTwoWs.components.find(x => x.componentId == this.ComponentTwoIdx);
+    debugger;
+    var componentTwoRow = selectedComponentTwo.rows[0];
     var componentTwoHeaders = this.SetCompNames(componentTwoRow);
     componentTwoHeaders.unshift(ignore);
 
     var id = 1;
-    this._joinModalDto.CompTwoWsIdx = components[1].componentOptions.workSheetId;
-    this._joinModalDto.CompTwoIdx = components[1].componentOptions.compIdx;
+    this._joinModalDto.CompTwoWsIdx = selectedComponentTwoWs.workSheetId;
+    this._joinModalDto.CompTwoIdx = selectedComponentTwo.componentId;
 
     this._joinModalDto.IsMerge = true;
-    componentOneHeaders.forEach(x=>
-    {
-      this.AddMergeType(x,id, components[0], components[1], componentTwoHeaders);
+    componentOneHeaders.forEach(x => {
+      this.AddMergeType(x, id, selectedComponentOne, selectedComponentTwo, componentTwoHeaders);
       id++;
     });
   }
@@ -194,6 +231,20 @@ export class JoinComponent implements OnInit {
     
     return headers;
   }
+
+  public changeCompTwoWs($event: any) {
+ 
+    this._joinCompsTwo = [];
+
+    var filterComps = this._joinComps.filter(x => x.workSheetId == $event.workSheetId);
+
+    filterComps.forEach(f => {
+      this._joinCompsTwo.push(f);
+    });
+
+  }
+
+ 
   
 
 }

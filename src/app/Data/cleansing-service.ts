@@ -108,10 +108,10 @@ export class CleansingService extends ApiBase {
       public async AddOperation(addOperationRequest : AddOperationRequest) : Promise<AddOperationResponse>
       {
         var requestPayLoad : string = JSON.stringify(addOperationRequest);
-        let formData: FormData = new FormData();
-        formData.append('request', requestPayLoad);
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
-        var response = await this._http.post(API_URL + 'api/Cleanse/AddOperation', formData)
+        var response = await this._http.post(API_URL + 'api/Cleanse/AddOperation', requestPayLoad, { headers: headers })
         .toPromise()
         .then(x=> x as AddOperationResponse)
     
@@ -138,10 +138,10 @@ export class CleansingService extends ApiBase {
       public async Export(cleanseExportRequest : CleanseExportRequest) : Promise<CleanseExportResponse>
       {
         var requestPayLoad : string = JSON.stringify(cleanseExportRequest);
-        let formData: FormData = new FormData();
-        formData.append('request', requestPayLoad);
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
-        var response = await this._http.post(API_URL + 'api/Cleanse/Export', formData)
+        var response = await this._http.post(API_URL + 'api/Cleanse/Export', requestPayLoad, { headers: headers })
         .toPromise()
         .then(x=> x as CleanseExportResponse)
     

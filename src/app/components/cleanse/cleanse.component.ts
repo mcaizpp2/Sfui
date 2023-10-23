@@ -23,6 +23,8 @@ import { OperationValidationDto } from '../..//Models/Dtos/Cleansing/operation-v
 import { RowTypeDto } from '../../Models/Dtos/Cleansing/row-type-dto';
 import { RowOptionsDto } from '../..//Models/Dtos/Cleansing/row-options-dto';
 import { AuthenticationService } from '../..//Data/authentication-service';
+import { JoinSheet } from '../../Models/Dtos/join-sheet';
+import { JoinComp } from '../../Models/Dtos/join-comp';
 
 @Component({
   selector: 'app-cleanse',
@@ -53,7 +55,10 @@ constructor(private _cleansingBl : CleansingBl,
   public FilePath : string = 'Please Drop File Here';
   public Processed = false;
   public Components : ComponentsDto[] = [];
-  public CleanedDtos : CleanedWsDto[];
+  public CleanedDtos: CleanedWsDto[];
+  public JoinSheets: JoinSheet[] = [];
+
+  public JoinComps: JoinComp[] = [];
   public MenuOption : MenuOption;
   public Operations : OperationsDto[];
   public JoinModalDto : JoinModalDto;
@@ -134,7 +139,7 @@ constructor(private _cleansingBl : CleansingBl,
   private CreateCompNames(comp : ComponentLkpDto[] )
   {
     var selectedComponent = this.Components.find(x=> x.componentId == this.MenuOption.ComponentId)!;
-
+    debugger;
     this.CleanedDtos.forEach(cl=>
       {
   
@@ -143,7 +148,7 @@ constructor(private _cleansingBl : CleansingBl,
           cl.components.forEach(cmp=>
           {
             var add = false;
-            if (cmp.name != selectedComponent.name)
+            if (cmp.name != selectedComponent.name && this.MenuOption.WorkSheetId == cl.workSheetId)
             {
               add = true;
             }
@@ -160,7 +165,9 @@ constructor(private _cleansingBl : CleansingBl,
             }
             });
         }
-      });
+    });
+
+    debugger;
 
   }
 
@@ -458,7 +465,7 @@ constructor(private _cleansingBl : CleansingBl,
       this.Operations = response.operations
     
     }
-  }
+  } 
 
   public Close()
   {
@@ -470,11 +477,19 @@ constructor(private _cleansingBl : CleansingBl,
     var response = await this._cleansingBl.Load(this._cleanseMgrId, show);
     var cleaned = response.cleanedDtos;
     cleaned.push(response.processed);
+    debugger;
     var cleansed = response.cleanedDtos[0];
     this.CleanedDtos = response.cleanedDtos;
     this.SetComponents(cleansed.workSheet);
 
-    debugger;
+    response.cleanedDtos.forEach(x => {
+      this.JoinSheets.push(new JoinSheet({ workSheetId: x.workSheetId, name: x.workSheet }));
+
+      x.components.forEach(comp => {
+        this.JoinComps.push(new JoinComp({ name: comp.name, compIdx: comp.componentId, workSheetId: x.workSheetId }));
+      });
+    });
+
     this.Validations = response.validations;
 
     this.Operations.forEach(op=>
