@@ -711,7 +711,7 @@
 <div class="sectionHeader">
     <div class="sectionContent sectionTop">
         <div class="row padBtmBtns">
-          <div class="col-sm-4">
+          <div class="col-sm-5">
               <button class="btn btn-info btn-square btn-sm margLeft" [disabled]="HasLoaded" (click)="Load()" >Map</button>
               <button class="btn btn-info btn-square btn-sm margLeft" [disabled]="!HasLoaded" (click)="Refresh()" >Load</button> 
               <button class="btn btn-info btn-square btn-sm margLeft wdth" [disabled]="!HasCompleted" (click)="ViewAssumptions(assumptionsModel)">Assumptions</button>
@@ -737,7 +737,7 @@
           <button class="btn btn-info btn-square btn-sm margLeft" (click)="Export()" [disabled]="!HasLoaded">Export</button>
         </div>  
       </div>
-    </div>5
+    </div>
     <div class="sectionContent sectionTop" *ngIf="HasCompleted">
       <nav class="navLeft">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
