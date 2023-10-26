@@ -14,6 +14,7 @@ import { DeleteValuesResponse } from "../Models/Response/delete-values-response"
 import { UpdateValueResponse } from "../Models/Response/update-value-response";
 import { MediatorService } from "../Services/mediator.service";
 import { ApiBase } from "./api-base";
+import { Observable } from "rxjs";
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -86,11 +87,14 @@ export class AdminValuesService extends ApiBase {
 
       public async UpdateSprinklerValue(request : UpdateSprinklerRequest) : Promise<UpdateValueResponse>
       {
-        var requestPayLoad : string = JSON.stringify(request);
-        let formData: FormData = new FormData();
-        formData.append('request', requestPayLoad);
+        var requestPayLoad: string = JSON.stringify(request);
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
-        var response = await this._http.put(API_URL + 'api/Values/UpdateSprinklerValues', formData)
+        //var response = await firstValueFrom(this._http.put(API_URL + 'api/Values/UpdateSprinklerValues', requestPayLoad, { headers: headers }))
+        //  .then(x => x as UpdateValueResponse)
+
+        var response = await this._http.put(API_URL + 'api/Values/UpdateSprinklerValues', requestPayLoad, { headers: headers })
         .toPromise()
         .then(x=> x as UpdateValueResponse)
     
@@ -111,4 +115,8 @@ export class AdminValuesService extends ApiBase {
         this.ProcessResponse(response);
         return response;
       }
+}
+
+function firstValueFrom(arg0: Observable<Object>) {
+    throw new Error("Function not implemented.");
 }
