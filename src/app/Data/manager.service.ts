@@ -112,12 +112,11 @@ public async Download(conversionDto : ConversionDto): Promise<void>
 
   public async SaveImport(conversion : ConversionDto) : Promise<SaveConversionResponse>
   {
-
     var conversionPayLoad : string = JSON.stringify(conversion);
-    let formData: FormData = new FormData();
-    formData.append('conversion', conversionPayLoad);
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
-    var response = await this._http.post(API_URL + 'api/Manager/SaveImport', formData)
+    var response = await this._http.post(API_URL + 'api/Manager/SaveImport', conversionPayLoad, { headers: headers })
     .toPromise()
     .then(x=> x as SaveConversionResponse)
 
