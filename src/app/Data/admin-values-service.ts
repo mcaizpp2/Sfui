@@ -117,6 +117,3 @@ export class AdminValuesService extends ApiBase {
       }
 }
 
-function firstValueFrom(arg0: Observable<Object>) {
-    throw new Error("Function not implemented.");
-}
