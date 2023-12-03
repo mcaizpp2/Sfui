@@ -18,6 +18,9 @@ export class RouterLinkTwoComponent implements AgRendererComponent  {
     {
       this.HasVisibleLink = true;
     }
+    if (params.data.cleansedMgrId) {
+      this.HasVisibleLink = true;
+    }
   }
 
   refresh(params: any): boolean {
