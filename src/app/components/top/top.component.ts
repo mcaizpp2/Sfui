@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MediatorService } from '../../Services/mediator.service';
 import { UserDto } from '../../Models/Dtos/user-dto';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, timer } from 'rxjs';
 import { SignalRService } from '../../Services/signal-rservice';
 import { NotificationMessage } from '../../Models/notification-message';
 import { ToastrService } from 'ngx-toastr';
@@ -30,6 +30,10 @@ export class TopComponent implements OnInit {
   private _isRunning = false;
 
   messageSubscription: Subscription;
+
+  private lpScription: Subscription;
+
+  private _obsTimer: Observable<number> = timer(1000, 1000);
 
   constructor(private _messageService: MessageService, 
     private _authenticationService : AuthenticationService,
@@ -95,29 +99,58 @@ export class TopComponent implements OnInit {
   {
     this._modalService.dismissAll();
   }
+  private async load(status: boolean) {
+    if (status) {
 
-  private load(status : boolean)
-  {
+      this.lpScription = this._obsTimer.subscribe(val => {
+        if (this.Progress >= 100) {
+          this.Progress = 0;
+        } else {
 
-     if (this._interval && status)
-     {
-       clearInterval(this._interval);
-     }
+          this.Progress += 10;
+        }
+      });
+    }
 
-      if (status) {
-        this._interval = setInterval(() => {
-          if (this.Progress >= 100) {
-            this.Progress = 0;
-          } else {
-            this.Progress++;
-          }
-        }, 100);
+    if (!status) {
+
+      while (this.Progress < 100) {
+        this.Progress += 3;
+        await this.timeout(50);
       }
-      else {
-        clearInterval(this._interval);
-        this.stop();
-      }
+
+      this.Progress = 0;
+      if (this.lpScription)
+        this.lpScription.unsubscribe();
+    }
+
   }
+
+  private timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  //private load(status : boolean)
+  //{
+
+  //   if (this._interval && status)
+  //   {
+  //     clearInterval(this._interval);
+  //   }
+
+  //    if (status) {
+  //      this._interval = setInterval(() => {
+  //        if (this.Progress >= 100) {
+  //          this.Progress = 0;
+  //        } else {
+  //          this.Progress++;
+  //        }
+  //      }, 100);
+  //    }
+  //    else {
+  //      clearInterval(this._interval);
+  //      this.stop();
+  //    }
+  //}
 
 
   private stop()
