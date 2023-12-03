@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
   messageSubscription: Subscription;
   convFailSubscription : Subscription;
   progressSubscription : Subscription;
-  completeSubscription : Subscription;
+  completeSubscription: Subscription;
+  cleanseCompleteSubscription: Subscription;
  
   constructor(private _mediatorService: MediatorService,
     private _authenticationService : AuthenticationService,
@@ -61,8 +62,13 @@ export class AppComponent implements OnInit {
 
     this.completeSubscription = this._signalrService.completeMsg.subscribe(msg => {  
   
-      debugger;
       this._mediatorService.CompleteSend(msg);
+
+    });
+    debugger;
+    this.cleanseCompleteSubscription = this._signalrService.cleanseCompleteMsg.subscribe(msg => {
+
+      this._mediatorService.CleanseCompleteSend(msg);
 
     });
 

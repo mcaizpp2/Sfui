@@ -155,7 +155,9 @@
         <nav class="navLeft">
             <div class="nav nav-tabs mrg" id="nav-tab" role="tablist">
                 <ng-container *ngFor="let cleansed of CleanedDtos;let i - index">    
-                    <button class="active nav-link active" data-toggle="tab" (click)="SetComponents(cleansed.workSheet)">{{cleansed.workSheet}}</button>
+                    <button class="nav-link"
+                            [ngClass]="{'active': cleansed.active===true}"
+                            data-toggle="tab" (click)="SetComponents(cleansed.workSheet)">{{cleansed.workSheet}}</button>
                 </ng-container>
                 <button class="btn btn-info btn-square btn-sm btnWdth margLeft" 
                 (click)="ShowOpHistory()">Op History</button>
@@ -176,54 +178,66 @@
                     <div  class="col-sm-12">
                      <ng-container *ngFor="let com of Components;let i - index">
                       
-                            <table class="tblComponents tblMargin" style="table-layout:auto !important;" >
-                                <tr *ngIf="!com.processed" class="componentTr" style="background-color:black;height: 20px;width:100%">
-                                    <td class="comHeader componentTd bacBlk">
-                                        <i class="fa fa-cog whiteCog" (click)="onComClick($event, com)"></i>
-                                    </td>
-                                    <td class="comHeader componentTd" [attr.colspan]="com.cellCount">
-                                        {{com.name}}<b *ngIf="com.isOrigin"> (origin)</b>
-                                    </td>                       
-                                </tr>
-                                <ng-container *ngFor="let row of com.rows;let j - index">
-                                    <tr style="height: 20px;width:100%" class="componentTr">
-                                        <td class="bacBlk" *ngIf="!com.processed">
-                                            <i class="fa fa-cog whiteCog gldCol"  (click)="onRowClick($event, row, com)"></i>
-                                        </td>
-                                        <!--<td *ngIf="com.processed">&nbsp;</td>-->
-                                        <ng-container *ngFor="let cell of row.cells;let v - index" >
-                                           
-                                            <td class="rowStyle componentTd" 
-                                            *ngIf="!IsHeader(row.row) && !IsExport()" 
-                                            [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}">
-                                            {{cell.cellValue}}</td>
-                                        
-                                            <td class="rowStyle componentTd" 
-                                            *ngIf="IsExport() && IsHeader(row.row)" 
-                                            class="excelTitle">
-                                            {{cell.cellValue}}</td>
+                       <table class="tblComponents tblMargin" style="table-layout:auto !important;">
+                         <tr *ngIf="!com.processed" class="componentTr" style="background-color:black;height: 20px;width:100%">
+                           <td class="comHeader componentTd bacBlk">
+                             <i class="fa fa-cog whiteCog" (click)="onComClick($event, com)"></i>
+                           </td>
+                           <td class="comHeader componentTd" [attr.colspan]="com.cellCount">
+                             {{com.name}}<b *ngIf="com.isOrigin"> (origin)</b>
+                           </td>
+                         </tr>
+                         <tr class="componentTr">
+                           <td *ngIf="!com.processed"></td>
+                           <ng-container *ngFor="let header of com.headers;let v = index">
+                             <td class="excelTitle">
+                               {{header.colName}}
+                               <i class="fa fa-square gldCol" (click)="onColRightClick($event, header.colIdx, com)"></i>
+                             </td>
+                           </ng-container>
+                         </tr>
+                         <ng-container *ngFor="let row of com.rows;let j - index">
+                           <tr style="height: 20px;width:100%" class="componentTr">
+                             <td class="bacBlk" *ngIf="!com.processed">
+                               <i class="fa fa-cog whiteCog gldCol" (click)="onRowClick($event, row, com)"></i>
+                             </td>
+                             <!--<td *ngIf="com.processed">&nbsp;</td>-->
+                             <ng-container *ngFor="let cell of row.cells;let v - index">
 
-                                            <td class="rowStyle componentTd" 
-                                            *ngIf="IsExport() && !IsHeader(row.row)"
-                                            [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}">
-                                            {{cell.cellValue}}</td> 
 
-                                            <td class="rowStyle componentTd" 
-                                           
-                                            *ngIf="IsHeader(row.row) && !IsExport()" 
-                                           
-                                            [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}"
-                                            >{{cell.cellValue}}
-                                            <i class="fa fa-square gldCol" (click)="onColRightClick($event, cell, com)"></i>
-                                        </td>
-                                       
-                                        
-                                        </ng-container>
-                                        
-                                    </tr>
 
-                                </ng-container>
-                            </table>
+                               <td class="rowStyle componentTd"
+                                   *ngIf="!IsHeader(row.row) && !IsExport()"
+                                   [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}">
+                                 {{cell.cellValue}}
+                               </td>
+
+                               <td class="rowStyle componentTd"
+                                   *ngIf="IsExport() && IsHeader(row.row)"
+                                   class="excelTitle">
+                                 {{cell.cellValue}}
+                               </td>
+
+                               <td class="rowStyle componentTd"
+                                   *ngIf="IsExport() && !IsHeader(row.row)"
+                                   [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}">
+                                 {{cell.cellValue}}
+                               </td>
+
+                               <td class="rowStyle componentTd"
+                                   *ngIf="IsHeader(row.row) && !IsExport()"
+                                   [ngClass]="{excelTitle: IsHeader(row.row),excelTotal: IsTotal(row.row)}">
+                                 {{cell.cellValue}}
+                                 <i class="fa fa-square gldCol" (click)="onColRightClick($event, cell, com)"></i>
+                               </td>
+
+
+                             </ng-container>
+
+                           </tr>
+
+                         </ng-container>
+                       </table>
                               
                         </ng-container>
                         <div style="height:10px;"></div>

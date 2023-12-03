@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter, Directive } from '@angular/core';
 import { ChkMessage } from '../Models/chk-message';
 import { NotificationMessage } from '../Models/notification-message';
-import { CompleteMessage, ProgressMessage } from '../Models/progress-message';
+import { CleanseCompleteMessage, CompleteMessage, ProgressMessage } from '../Models/progress-message';
 
 @Directive()
 @Injectable({
@@ -15,7 +15,7 @@ export class MediatorService {
   @Output() Refresh : EventEmitter<NotificationMessage> = new EventEmitter();
   @Output() Checked : EventEmitter<ChkMessage> = new EventEmitter();
   @Output() Complete : EventEmitter<CompleteMessage> = new EventEmitter();
-
+  @Output() CleanseComplete: EventEmitter<CleanseCompleteMessage> = new EventEmitter();
   constructor() { }
 
   Publish(message : NotificationMessage)
@@ -36,5 +36,10 @@ export class MediatorService {
   CompleteSend(message : CompleteMessage)
   {
     this.Complete.emit(message);
+  }
+
+  CleanseCompleteSend(message: CleanseCompleteMessage)
+  {
+    this.CleanseComplete.emit(message);
   }
 }

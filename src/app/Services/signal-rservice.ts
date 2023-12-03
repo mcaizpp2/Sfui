@@ -4,7 +4,7 @@ import {Subject} from "rxjs";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { environment } from "../../environments/environment";
 import { UserInfo } from "../Models/Dtos/user-dto";
-import { CompleteMessage, ProgressMessage } from "../Models/progress-message";
+import { CleanseCompleteMessage, CompleteMessage, ProgressMessage } from "../Models/progress-message";
 
 @Directive()
 @Injectable({
@@ -16,6 +16,7 @@ export class SignalRService {
     failMsg = new Subject<NotificationMessage>();
     progressMsg = new Subject<ProgressMessage>();
     completeMsg = new Subject<CompleteMessage>();
+    cleanseCompleteMsg = new Subject<CleanseCompleteMessage>();
     private _connection : any;
 
     connect(userName : string) {
@@ -25,7 +26,7 @@ export class SignalRService {
 
         this._connection = new HubConnectionBuilder()
         .configureLogging(LogLevel.Information)
-	    .withAutomaticReconnect()
+	      .withAutomaticReconnect()
         .withUrl(url)
         .build();
 
@@ -63,6 +64,10 @@ export class SignalRService {
         this._connection.on("CompleteMessage", (message: CompleteMessage)=>
         {
          this.completeMsg.next(message);
+        });
+
+        this._connection.on("CleanseCompleteMessage", (message: CleanseCompleteMessage) => {
+          this.cleanseCompleteMsg.next(message);
         });
     }
 
