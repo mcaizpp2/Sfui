@@ -20,7 +20,8 @@ import { UserDto } from "../Models/Dtos/user-dto";
 import { CleanseExportRequest } from "../Models/Requests/cleanse-export-request";
 import { MenuOption } from "../Models/Dtos/Cleansing/menu-option";
 import { ReplayResponse } from "../Models/Response/replay-response";
-import  { ReplayRequest } from "../Models/Requests/replay-request";
+import { ReplayRequest } from "../Models/Requests/replay-request";
+import { DeleteCleanseMgrResponse } from "../Models/Response/delete-cleanse-mgr-response";
 
 @Injectable({
     providedIn: 'root'
@@ -41,6 +42,11 @@ export class CleansingBl {
 
         return response;
     }
+
+  public async Delete(cleanseMgrId: number): Promise<DeleteCleanseMgrResponse> {
+    var response = await this._cleansingService.Delete(cleanseMgrId);
+    return response;
+  }
 
     public async Load(cleanseMgrId : number, show : boolean = true) : Promise<CleanLoadResponse>
     {

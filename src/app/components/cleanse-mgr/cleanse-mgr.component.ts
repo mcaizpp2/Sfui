@@ -15,6 +15,7 @@ import { PagingResponse } from '../../Models/Response/paging-response';
 import { PagingDto } from '../../Models/Dtos/paging-dto';
 import { CleansedMgrDto } from '../../Models/Dtos/cleansed-mgr-dto';
 import { RouterLinkComponent } from '../../AgGrid/router-link/router-link.component';
+import { RouterLinkTwoComponent } from '../../AgGrid/router-link-two/router-link-two.component';
 
 @Component({
   selector: 'app-cleanse-mgr',
@@ -23,11 +24,14 @@ import { RouterLinkComponent } from '../../AgGrid/router-link/router-link.compon
 })
 export class CleanseMgrComponent implements OnInit, AfterViewInit {
   @ViewChild('newTemplate',{static: true}) newElement : TemplateRef<any>;
-  @ViewChild('replayTemplate',{static: true}) replayElement : TemplateRef<any>;
+  @ViewChild('replayTemplate', { static: true }) replayElement: TemplateRef<any>;
+  @ViewChild('load', { static: true }) loadElement: TemplateRef<any>;
+  @ViewChild('content', { static: true }) contentElement: TemplateRef<any>;
 
   public NoRowsTemplate =
   "<span style='font-weight:bold; color:#17a2b8; font-size:12px'>No Records Returned</span>";
 
+  private _paging: PagingDto;
   public NewForm: FormGroup;
   public Operation : string;
   public Options:GridOptions;
@@ -36,7 +40,15 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
   private _gridApi : any;
   public Paging : PagingResponse;
   public HasLoaded : boolean;
-  public CleansedMgrs : CleansedMgrDto[];
+  public CleansedMgrs: CleansedMgrDto[];
+
+  public ProgressTxt: string;
+  public ProgressPercent: number = 0;
+  public ParsingStarted: boolean = false;
+  public ParsingHeader: string;
+  private _cleanseMgrId: number;
+  public Title: string;
+
 
   public ColumnDefs = [
     {headerName: 'Id', field: 'cleansedMgrId', width:100, headerClass:'ag-custom-header',pinned: 'left' },
@@ -62,7 +74,21 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
         this.Replay(cleansedMgrDto);
       }.bind(this),
       label: 'Replay'
-    }},
+      }
+    },
+    {
+      headerName: '', field: 'cleansedMgrId', width: 140, headerClass: 'ag-custom-header', resizable: true,
+      cellRendererFramework: RouterLinkTwoComponent,
+      cellRendererParams: {
+        onClick: function (cleansedMgrDto: CleansedMgrDto) {
+          this._cleanseMgrId = cleansedMgrDto.cleansedMgrId;
+          this.Title = cleansedMgrDto.name;
+
+          this._modalService.open(this.contentElement, { ariaLabelledBy: 'modal-basic-title' });
+        }.bind(this),
+        label: 'Delete'
+      }
+    }
   ];
   constructor(private _messagingService : MessageService,
     private _authenticationService : AuthenticationService, 
@@ -107,6 +133,17 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public async DeleteRecord() {
+
+    var response = await this._cleansingBl.Delete(this._cleanseMgrId);
+
+    if (response.status) {
+      await this.GetNew(this._paging);
+    }
+    
+    this._modalService.dismissAll();
+  }
+
   private Replay(cleansedMgrDto : CleansedMgrDto)
   {
     this.setFormValues(cleansedMgrDto);
@@ -127,9 +164,9 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
     this.Paging = response;
   }
 
-  public Refresh()
+  public async Refresh()
   {
-
+    await this.GetNew(this._paging);
   }
 
   private initGrid()
@@ -155,6 +192,7 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
   }
   public async PageChanged(pagingDto : PagingDto)
   {
+    this._paging = pagingDto;
     await this.GetNew(pagingDto);
   }
 
@@ -224,14 +262,24 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
     var name = ctrls['name'].value;
     
     var userId = this._authenticationService.currentUserValue.userId;
-    var response = await this._cleansingBl.New(name, userId, this._file);
-    this._modalService.dismissAll();
 
-    if (response.status)
-    {
-      var cleansedMgrId = response.cleansedMgrId;
-      this._router.navigate(['/clean', cleansedMgrId]);
-    }
+    this.ParsingHeader = "Parsing Excel File";
+    this.ParsingStarted = true;
+    this.ProgressPercent = 0;
+    this.ProgressTxt = "0% Parsed";
+
+    this._modalService.dismissAll();
+    this._modalService.open(this.loadElement, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+
+    var response = await this._cleansingBl.New(name, userId, this._file);
+
+    //this._modalService.dismissAll();
+
+    //if (response.status)
+    //{
+    //  var cleansedMgrId = response.cleansedMgrId;
+    //  this._router.navigate(['/clean', cleansedMgrId]);
+    //}
   }
 
   onCellClicked(params)
@@ -239,5 +287,10 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
     var cleansedMgrId = params.data.cleansedMgrId;
     this._router.navigate(['/clean', cleansedMgrId]);
   }
+
+  public CloseModal() {
+    this._modalService.dismissAll();
+  }
+
 
 }

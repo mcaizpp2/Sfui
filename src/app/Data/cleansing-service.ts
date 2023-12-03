@@ -18,6 +18,7 @@ import { CleanseExportResponse } from "../Models/Response/cleanse-export-respons
 import { CleanseExportRequest } from "../Models/Requests/cleanse-export-request";
 import { ReplayRequest } from "../Models/Requests/replay-request";
 import { ReplayResponse } from "../Models/Response/replay-response";
+import { DeleteCleanseMgrResponse } from "../Models/Response/delete-cleanse-mgr-response";
 
 const API_URL = environment.apiUrl;
 
@@ -81,6 +82,21 @@ export class CleansingService extends ApiBase {
         this.ProcessResponse(response);
     
         return response;
+  }
+
+      public async Delete(cleanseMgrId: number): Promise<DeleteCleanseMgrResponse> {
+
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+
+        var response = await this._http.get(API_URL + 'api/Cleanse/Delete?cleanseMgrId=' + cleanseMgrId)
+        .toPromise()
+        .then(x => x as DeleteCleanseMgrResponse)
+
+        this.ProcessResponse(response);
+
+        return response;
+
       }
 
       public async LoadOperations(cleanseMgrId : number) : Promise<OperationsResponse>

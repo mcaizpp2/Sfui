@@ -4,64 +4,64 @@
     <button type="button" class="close modalClose" aria-label="lose" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">×</span>
     </button>
-    </div>
-     <div class="modal-body">
-      <form [formGroup]="NewForm">
-        <div class="row">
-          <div class="col-sm-2">
-              <label class="padTop">Name</label>
-          </div>
-          <div class="col-sm-6">
-              <input type="text" class="form-control txtSmall" name="name" formControlName="name"  />
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-sm-2 padTop">
-              <label class="padTop">File</label>
-          </div>
-  
-          <div class="col-sm-6 padTop">
-             <!-- <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Upload()"> Upload </button>-->
-              <input type="file" #fileInput ng2FileSelect [uploader]="uploader" style="font-size: 12px !important;" (onFileSelected)="onFileSelected($event)" />
-          </div>
-        </div>
-  
-        <div class="row padTxtTop margTop">
-          <div class="col-sm-3">
-            <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!NewForm.valid" (click)="ReplayBtn()"> Replay </button>
-          </div>
-        </div>
-      </form>
   </div>
-</ng-template>
-
-<ng-template #newTemplate let-modal>
-    <div class="modal-header bg-dark modal-lg">
-      <h4 class="modal-title modalTitle" id="modal-basic-title">{{Operation}} Cleansed Import</h4>
-      <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
+  <div class="modal-body">
     <form [formGroup]="NewForm">
       <div class="row">
         <div class="col-sm-2">
-            <label class="padTop">Name</label>
+          <label class="padTop">Name</label>
         </div>
         <div class="col-sm-6">
-            <input type="text" class="form-control txtSmall" name="name" formControlName="name"  />
+          <input type="text" class="form-control txtSmall" name="name" formControlName="name" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-sm-2 padTop">
-            <label class="padTop">File</label>
+          <label class="padTop">File</label>
         </div>
 
         <div class="col-sm-6 padTop">
-           <!-- <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Upload()"> Upload </button>-->
-            <input type="file" #fileInput ng2FileSelect [uploader]="uploader" style="font-size: 12px !important;" (onFileSelected)="onFileSelected($event)" />
+          <!-- <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Upload()"> Upload </button>-->
+          <input type="file" #fileInput ng2FileSelect [uploader]="uploader" style="font-size: 12px !important;" (onFileSelected)="onFileSelected($event)" />
+        </div>
+      </div>
+
+      <div class="row padTxtTop margTop">
+        <div class="col-sm-3">
+          <button class="btn-sm btn-success btn-outline-rounded btn-info" [disabled]="!NewForm.valid" (click)="ReplayBtn()"> Replay </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #newTemplate let-modal>
+  <div class="modal-header bg-dark modal-lg">
+    <h4 class="modal-title modalTitle" id="modal-basic-title">{{Operation}} Cleansed Import</h4>
+    <button type="button" class="close modalClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="NewForm">
+      <div class="row">
+        <div class="col-sm-2">
+          <label class="padTop">Name</label>
+        </div>
+        <div class="col-sm-6">
+          <input type="text" class="form-control txtSmall" name="name" formControlName="name" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2 padTop">
+          <label class="padTop">File</label>
+        </div>
+
+        <div class="col-sm-6 padTop">
+          <!-- <button class="btn-sm btn-success btn-outline-rounded btn-info" (click)="Upload()"> Upload </button>-->
+          <input type="file" #fileInput ng2FileSelect [uploader]="uploader" style="font-size: 12px !important;" (onFileSelected)="onFileSelected($event)" />
         </div>
       </div>
 
@@ -71,40 +71,77 @@
         </div>
       </div>
     </form>
-</div>
+  </div>
 
+</ng-template>
+
+<ng-template #load let-modal>
+  <div class="modal-header bg-dark">
+    <h4 class="modal-title modalTitle" id="modal-basic-title">{{ParsingHeader}}</h4>
+
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <ngb-progressbar [value]="ProgressPercent" style="padding-left: 4px;padding-right: 4px;"
+                         [striped]="true" [animated]="true"></ngb-progressbar>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <span class="bld lblTxt noLineHeight"> {{ProgressTxt}}</span>
+      </div>
+    </div>
+
+  </div>
+
+</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-header bg-dark">
+    <h4 class="modal-title modalTitle" id="modal-basic-title">Delete Cleanse Manager</h4>
+    <button type="button" class="close modalClose" aria-label="Close" (click)="CloseModal()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete the Cleanse Manager record '<b>{{Title}}</b>'?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-sm btn-success btn-outline-rounded btn-info" (click)="DeleteRecord()">Yes</button>
+    <button type="button" class="btn-sm btn-success btn-outline-rounded btn-info" (click)="CloseModal()">No</button>
+  </div>
 </ng-template>
 
 <div class="sectionHeader">
 
-    <div class="sectionContent">
-        <div class="row padBtmBtns">
-          <div class="col-sm-4">
-              <button class="btn btn-info btn-square btn-sm margLeft" (click)="Refresh()" >Refresh</button>
-              <button class="btn btn-info btn-square btn-sm margLeft" (click)="New()" >New</button>
-           </div>
-        </div>
+  <div class="sectionContent">
+    <div class="row padBtmBtns">
+      <div class="col-sm-4">
+        <button class="btn btn-info btn-square btn-sm margLeft" (click)="Refresh()">Refresh</button>
+        <button class="btn btn-info btn-square btn-sm margLeft" (click)="New()">New</button>
+      </div>
     </div>
+  </div>
 
-    <div class="sectionContent">
-        <div class="row tblMargin">
-            <div class="sectionContent sectionTop">
-                <ag-grid-angular
-                    *ngIf="HasLoaded"
-                    style="width: 1042px;"
-                    class="ag-theme-balham marg"
-                    [rowData]="CleansedMgrs"
-                    [columnDefs]="ColumnDefs"
-                    [gridOptions]="Options"
-                    (cellDoubleClicked)='onCellClicked($event)'
-                    [rowSelection]="RowSelection"
-                    [overlayNoRowsTemplate]="NoRowsTemplate"
-                    (gridReady)="onGridReady($event)">
-                  </ag-grid-angular>
-                  <div class="marg">
-                    <app-pager [Paging]="Paging" [TypeId]="2" (PagingChanged)="PageChanged($event)"></app-pager>
-                </div>
-            </div>
+  <div class="sectionContent">
+    <div class="row tblMargin">
+      <div class="sectionContent sectionTop">
+        <ag-grid-angular *ngIf="HasLoaded"
+                         style="width: 1182px;"
+                         class="ag-theme-balham marg"
+                         [rowData]="CleansedMgrs"
+                         [columnDefs]="ColumnDefs"
+                         [gridOptions]="Options"
+                         (cellDoubleClicked)='onCellClicked($event)'
+                         [rowSelection]="RowSelection"
+                         [overlayNoRowsTemplate]="NoRowsTemplate"
+                         (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+        <div class="marg">
+          <app-pager [Paging]="Paging" [TypeId]="2" (PagingChanged)="PageChanged($event)"></app-pager>
         </div>
+      </div>
     </div>
+  </div>
 </div>
