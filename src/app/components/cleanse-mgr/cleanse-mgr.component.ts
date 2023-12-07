@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit,TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, NgZone, OnInit,TemplateRef, ViewChild } from '@angular/core';
 import { GridOptions } from 'ag-grid-community';
 import { CleansingBl } from '../../Bl/cleansing-bl';
 import { AuthenticationService } from '../../Data/authentication-service';
@@ -16,6 +16,9 @@ import { PagingDto } from '../../Models/Dtos/paging-dto';
 import { CleansedMgrDto } from '../../Models/Dtos/cleansed-mgr-dto';
 import { RouterLinkComponent } from '../../AgGrid/router-link/router-link.component';
 import { RouterLinkTwoComponent } from '../../AgGrid/router-link-two/router-link-two.component';
+import { MediatorService } from '../../Services/mediator.service';
+import { SignalrMessageType } from '../../Models/Enums/message-type';
+import { NotificationMessage } from '../../Models/notification-message';
 
 @Component({
   selector: 'app-cleanse-mgr',
@@ -95,8 +98,10 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
     private _cleansingBl : CleansingBl,
     private _formBuilder: FormBuilder,
     private _modalService: NgbModal,
+    private _mediatorService : MediatorService,
     private _router : Router,
-    private _pagingBl : PagingBl) { }
+    private _pagingBl: PagingBl,
+    private ngZone: NgZone) { }
 
   async ngOnInit() {
     await this.initPager();
@@ -110,6 +115,32 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
       userId : ['',Validators.required],
       status : ['', Validators.required],
       replayId : ['']
+    });
+
+    this._mediatorService.ConvFailed.subscribe(x => {
+      this._modalService.dismissAll();
+    });
+
+    this._mediatorService.CleanseComplete.subscribe(x => {
+      this._modalService.dismissAll();
+
+      this._mediatorService.Publish(new NotificationMessage({
+        messageType: SignalrMessageType.Success,
+        subject: x.subject,
+        Refresh: false,
+        body: x.body
+
+      }));
+      this._router.navigate(['/clean', x.cleanseMgrId]);
+    });
+
+    this._mediatorService.Progressed.subscribe(x => {
+      this.ngZone.run(() => {
+        this.ParsingStarted = true;
+        this.ProgressPercent = x.progress;
+        this.ProgressTxt = x.progress + '%  - ' + x.complete;
+      });
+
     });
    
   }
@@ -126,7 +157,6 @@ export class CleanseMgrComponent implements OnInit, AfterViewInit {
     if (response.status)
     {
       var cleansedMgrId = response.cleansedMgrId;
-      debugger;
       var replayResponse = await this._cleansingBl.Replay(cleansedMgrId, replayId, name, this._file, this._authenticationService.currentUserValue);
  
       this._router.navigate(['/clean', cleansedMgrId]);
