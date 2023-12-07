@@ -22,7 +22,11 @@ export class ComponentsDto {
 
     isOrigin : boolean;
 
-    componentId : number;
+    componentId: number;
+
+    totalPages: number;
+
+    currentPage: number;
 
     constructor(values: Object = {}) {}
 }
