@@ -175,7 +175,7 @@
                 <tr>
                     <td style="border-bottom: none !important;border-left:none;border-right:none;">
                     -->
-                    <div  class="col-sm-12">
+                    <div class="col-sm-12">
                      <ng-container *ngFor="let com of Components;let i - index">
                       
                        <table class="tblComponents tblMargin" style="table-layout:auto !important;">
@@ -188,7 +188,7 @@
                            </td>
                          </tr>
                          <tr class="componentTr">
-                           <td *ngIf="!com.processed"></td>
+                           <td *ngIf="!com.processed" style="background-color:grey"></td>
                            <ng-container *ngFor="let header of com.headers;let v = index">
                              <td class="excelTitle">
                                {{header.colName}}
@@ -202,7 +202,7 @@
                                <i class="fa fa-cog whiteCog gldCol" (click)="onRowClick($event, row, com)"></i>
                              </td>
                              <!--<td *ngIf="com.processed">&nbsp;</td>-->
-                             <ng-container *ngFor="let cell of row.cells;let v - index">
+                             <ng-container *ngFor="let cell of row.cells;let v = index">
 
 
 
@@ -212,9 +212,9 @@
                                  {{cell.cellValue}}
                                </td>
 
-                               <td class="rowStyle componentTd"
+                               <td class="rowStyle componentTd excelTitle"
                                    *ngIf="IsExport() && IsHeader(row.row)"
-                                   class="excelTitle">
+                                  >
                                  {{cell.cellValue}}
                                </td>
 
@@ -237,6 +237,16 @@
                            </tr>
 
                          </ng-container>
+                         <tr class="componentTr" style="background-color:grey;height: 20px;width:100%">
+                           <td class="componentTd" [attr.colspan]="com.cellCount+1" style="text-align:right">
+                             <ng-container *ngFor="let _ of [].constructor(com.totalPages);let i = index">
+                             
+                               <a [routerLink]="" *ngIf="com.currentPage === (i+1)" (click)="SetPage()" class="disabled" style="font-weight:bold;margin-right:2px; font-size:10px;">{{i+1}}</a>
+
+                               <a [routerLink]="" *ngIf="com.currentPage != (i+1)" (click)="SetPage()" style="font-weight:bold;margin-right:2px; font-size:10px;">{{i+1}}</a>
+                             </ng-container>
+                           </td>
+                         </tr>
                        </table>
                               
                         </ng-container>

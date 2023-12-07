@@ -76,7 +76,7 @@ constructor(private _cleansingBl : CleansingBl,
     await this.Load(true);
     this._messagingService.LoadingMsg(false);
 
-    this.LoadValidations();
+   // this.LoadValidations();
   }
 
   onRowClick(event : MouseEvent, row : RowTypeDto, component : ComponentsDto)
@@ -374,7 +374,7 @@ constructor(private _cleansingBl : CleansingBl,
 
     this._messagingService.LoadingMsg(false);
 
-    this.LoadValidations();
+    //this.LoadValidations();
 
   }
 
@@ -395,7 +395,7 @@ constructor(private _cleansingBl : CleansingBl,
     await this.LoadOperations();
     await this.Load(false);
     this._modalService.dismissAll();
-    this.LoadValidations();
+    //this.LoadValidations();
 
     this._messagingService.LoadingMsg(false);
 
@@ -424,7 +424,7 @@ constructor(private _cleansingBl : CleansingBl,
     await this.Load(false);
     this._modalService.dismissAll();
 
-    this.LoadValidations();
+    //this.LoadValidations();
 
     this._messagingService.LoadingMsg(false);
 
@@ -437,6 +437,7 @@ constructor(private _cleansingBl : CleansingBl,
         this._modalService.open(this._modalService.open(this.valElement, { ariaLabelledBy: 'modal-basic-title'}));
     };
   }
+
   public SetComponents(wsName : string)
   {
     if (wsName == "Processed")
@@ -563,7 +564,7 @@ constructor(private _cleansingBl : CleansingBl,
     this.CloseOpHistory();
    
 
-    this.LoadValidations();
+    //this.LoadValidations();
 
     this._messagingService.LoadingMsg(false);
   }
@@ -581,4 +582,8 @@ constructor(private _cleansingBl : CleansingBl,
     this._router.navigate(['/manager']);
   }
 
+
+  public SetPage() {
+    debugger;
+  }
 }
