@@ -90,12 +90,12 @@ constructor(private _cleansingBl : CleansingBl,
     this.contextMenu.openMenu();
   }
 
-  onColRightClick(event : MouseEvent, cell : WsCellDto, component : ComponentsDto){
+  onColRightClick(event : MouseEvent, colIdx : number, component : ComponentsDto){
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-
-    var selectedColOption = component.columnOptions.find(x=> x.colIdx == cell.colIdx);
+    debugger;
+    var selectedColOption = component.columnOptions.find(x=> x.colIdx == colIdx);
     this.AssignMenuOptions(component.componentId, component.name, selectedColOption, undefined, undefined);
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
