@@ -1,4 +1,8 @@
-
+.pgLink {
+  font-weight: bold;
+  margin-right: 2px;
+  font-size: 10px;
+}
 
 .cog
 {

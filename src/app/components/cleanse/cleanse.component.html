@@ -241,9 +241,9 @@
                            <td class="componentTd" [attr.colspan]="com.cellCount+1" style="text-align:right">
                              <ng-container *ngFor="let _ of [].constructor(com.totalPages);let i = index">
                              
-                               <a [routerLink]="" *ngIf="com.currentPage === (i+1)" (click)="SetPage()" class="disabled" style="font-weight:bold;margin-right:2px; font-size:10px;">{{i+1}}</a>
+                               <a [routerLink]="" *ngIf="com.currentPage === (i+1)" (click)="SetPage(com, (i+1))" class="disabled pgLink">{{i+1}}</a>
 
-                               <a [routerLink]="" *ngIf="com.currentPage != (i+1)" (click)="SetPage()" style="font-weight:bold;margin-right:2px; font-size:10px;">{{i+1}}</a>
+                               <a [routerLink]="" *ngIf="com.currentPage != (i+1)" (click)="SetPage(com, (i+1))" class="pgLink">{{i+1}}</a>
                              </ng-container>
                            </td>
                          </tr>

@@ -22,6 +22,7 @@ import { MenuOption } from "../Models/Dtos/Cleansing/menu-option";
 import { ReplayResponse } from "../Models/Response/replay-response";
 import { ReplayRequest } from "../Models/Requests/replay-request";
 import { DeleteCleanseMgrResponse } from "../Models/Response/delete-cleanse-mgr-response";
+import { ComponentPagingRequest } from "../Models/Requests/component-paging-request";
 
 @Injectable({
     providedIn: 'root'
@@ -48,12 +49,13 @@ export class CleansingBl {
     return response;
   }
 
-    public async Load(cleanseMgrId : number, show : boolean = true) : Promise<CleanLoadResponse>
+  public async Load(cleanseMgrId: number, show: boolean = true, lstPagingRequests: ComponentPagingRequest[]) : Promise<CleanLoadResponse>
     {
         var cleanLoadRequest = new CleanLoadRequest 
         ({
             CleanseMgrId : cleanseMgrId,
-            Show : show
+            Show: show,
+            PagingRequests: lstPagingRequests
         });
 
         var response = await this._cleansingService.Load(cleanLoadRequest);

@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from '../../Services/message-service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ColumnOptionsDto } from '../../Models/Dtos/Cleansing/column-dtos';
-import { WsCellDto } from '../../Models/Dtos/Cleansing/ws-cell-dto';
 import { MenuOption} from '../../Models/Dtos/Cleansing/menu-option';
 import { OperationTypeDto } from '../../Models/Dtos/Cleansing/operation-type-dto';
 import { OperationsDto } from '../../Models/Dtos/Cleansing/operations-dto';
@@ -25,6 +24,7 @@ import { RowOptionsDto } from '../..//Models/Dtos/Cleansing/row-options-dto';
 import { AuthenticationService } from '../..//Data/authentication-service';
 import { JoinSheet } from '../../Models/Dtos/join-sheet';
 import { JoinComp } from '../../Models/Dtos/join-comp';
+import { ComponentPagingRequest } from '../../Models/Requests/component-paging-request';
 
 @Component({
   selector: 'app-cleanse',
@@ -64,7 +64,8 @@ constructor(private _cleansingBl : CleansingBl,
   public JoinModalDto : JoinModalDto;
   public MapLkpDto : MapLkpDto;
   public Validations : OperationValidationDto[];
-  public Export : boolean;
+  public Export: boolean;
+  private _lstPagingRequests: ComponentPagingRequest[] = [];
 
   async ngOnInit() {
    this._route.params.subscribe(params => {
@@ -449,6 +450,8 @@ constructor(private _cleansingBl : CleansingBl,
       this.Export = false;
     }
 
+    debugger;
+
     this.Components = [];
     var cleanseDto = this.CleanedDtos.find(x=> x.workSheet === wsName)!;
 
@@ -475,7 +478,7 @@ constructor(private _cleansingBl : CleansingBl,
 
   public async Load(show : boolean = true)
   {
-    var response = await this._cleansingBl.Load(this._cleanseMgrId, show);
+    var response = await this._cleansingBl.Load(this._cleanseMgrId, show, this._lstPagingRequests);
     var cleaned = response.cleanedDtos;
     cleaned.push(response.processed);
 
@@ -583,7 +586,29 @@ constructor(private _cleansingBl : CleansingBl,
   }
 
 
-  public SetPage() {
+  public async SetPage(com: ComponentsDto, page: number)
+  {
+    this._messagingService.LoadingMsg(true);
+
+    var t = this._lstPagingRequests.find(x => x.ComponentId == com.componentId && x.WorkSheetId == com.workSheetId);
+
+    if (t) {
+      t.Page = page;
+    }
+    else {
+
+      var pgRequest = new ComponentPagingRequest(
+        {
+          Page: page,
+          WorkSheetId: com.workSheetId,
+          ComponentId: com.componentId
+        });
+
+      this._lstPagingRequests.push(pgRequest);
+    }
+
+    await this.Load(true);
+    this._messagingService.LoadingMsg(false);
     debugger;
   }
 }

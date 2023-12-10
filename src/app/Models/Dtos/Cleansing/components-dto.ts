@@ -24,6 +24,8 @@ export class ComponentsDto {
 
     componentId: number;
 
+    workSheetId: number;
+
     totalPages: number;
 
     currentPage: number;
