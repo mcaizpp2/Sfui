@@ -68,10 +68,10 @@
       <div class="col-sm-5" *ngIf="!JoinModal.IsMerge">
         <ng-select class="selectStyle"
                    [items]="jm.ComponentOneHeaders"
-                   bindLabel="Value"
+                   bindLabel="colName"
                    [(ngModel)]="jm.CompOneSelected"
                    placeholder="Please select ComponentOne Field"
-                   bindValue="Id"
+                   bindValue="colIdx"
                    clearable="true"
                    clearAllText="Clear">
         </ng-select>
@@ -80,10 +80,10 @@
       <div class="col-sm-5">
         <ng-select class="selectStyle"
                    [items]="jm.ComponentTwoHeaders"
-                   bindLabel="Value"
+                   bindLabel="colName"
                    [(ngModel)]="jm.CompTwoSelected"
                    placeholder="Please select ComponentTwo Field"
-                   bindValue="Id"
+                   bindValue="colIdx"
                    clearable="true"
                    clearAllText="Clear">
         </ng-select>

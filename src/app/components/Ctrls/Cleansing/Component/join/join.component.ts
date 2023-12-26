@@ -8,6 +8,7 @@ import { StrLookupDto } from '../../../../../Models/Dtos/str-lookup-dto';
 import { JoinComp } from '../../../../../Models/Dtos/join-comp';
 import { JoinSheet } from '../../../../../Models/Dtos/join-sheet';
 import { CleanedWsDto } from '../../../../../Models/Dtos/Cleansing/cleanedWs-dto';
+import { CompHeaderDto } from '../../../../../Models/Dtos/Cleansing/header-dto';
 
 @Component({
   selector: 'app-join',
@@ -82,6 +83,7 @@ export class JoinComponent implements OnInit {
     var joinType = this.JoinModal.JoinType;
 
     var components = this.GetComponents();
+    debugger;
     if (joinType == 2)
     {
     this.HandleMerge(components);
@@ -94,11 +96,11 @@ export class JoinComponent implements OnInit {
 
   private HandleJoin(components : ComponentsDto[])
   {
-    var componentOneRow = components[0].rows[0];
-    var componentOneHeaders = this.SetCompNames(componentOneRow);
+    //var componentOneRow = components[0].rows[0];
+    var componentOneHeaders = components[0].headers;
 
-    var componentTwoRow = components[1].rows[0];
-    var componentTwoHeaders = this.SetCompNames(componentTwoRow);
+    //var componentTwoRow = components[1].rows[0];
+    var componentTwoHeaders = components[1].headers;
    
     this._joinModalDto.CompTwoWsIdx = components[1].componentOptions.workSheetId;
     this._joinModalDto.CompTwoIdx = components[1].componentOptions.compIdx;
@@ -113,24 +115,22 @@ export class JoinComponent implements OnInit {
     var selectedComponentOneWs = this._lstCleanedWs.find(x => x.workSheetId == this.ComponentOneWs.workSheetId);
     var selectedComponentOne = selectedComponentOneWs.components.find(x => x.componentId == this.ComponentOne.compIdx);
     var componentOneRow = selectedComponentOne.rows[0];
-    var componentOneHeaders = this.SetCompNames(componentOneRow);
+    var componentOneHeaders = selectedComponentOne.headers;
 
-    var ignore = new StrLookupDto
+    var ignore = new CompHeaderDto
       (
         {
-          Id: -1,
-          Value: "Ignore"
+          colIdx: -1,
+          colName : "Ignore"
         }
       );
 
 
     var selectedComponentTwoWs = this._lstCleanedWs.find(x => x.workSheetId == this.ComponentTwoWsIdx);
     var selectedComponentTwo = selectedComponentTwoWs.components.find(x => x.componentId == this.ComponentTwoIdx);
-    debugger;
-    var componentTwoRow = selectedComponentTwo.rows[0];
-    var componentTwoHeaders = this.SetCompNames(componentTwoRow);
-    componentTwoHeaders.unshift(ignore);
 
+    var componentTwoHeaders = selectedComponentTwo.headers;
+    componentTwoHeaders.unshift(ignore);
     var id = 1;
     this._joinModalDto.CompTwoWsIdx = selectedComponentTwoWs.workSheetId;
     this._joinModalDto.CompTwoIdx = selectedComponentTwo.componentId;
@@ -156,7 +156,7 @@ export class JoinComponent implements OnInit {
     return components;
   }
 
-  private AddJoinType(id : number,componentOne: ComponentsDto, componentTwo: ComponentsDto, compTwoHeaders : StrLookupDto[], compOneHeaders : StrLookupDto[])
+  private AddJoinType(id: number, componentOne: ComponentsDto, componentTwo: ComponentsDto, compTwoHeaders: CompHeaderDto[], compOneHeaders: CompHeaderDto[])
   {
     debugger;
     var joinCriteria = new JoinCriteria({
@@ -175,7 +175,7 @@ export class JoinComponent implements OnInit {
     this.JoinModal.JoinCriteria.push(joinCriteria);
   }
 
-  private AddMergeType(compOneSelected : StrLookupDto, id : number,componentOne: ComponentsDto, componentTwo: ComponentsDto, compTwoHeaders : StrLookupDto[])
+  private AddMergeType(compOneSelected: CompHeaderDto, id: number, componentOne: ComponentsDto, componentTwo: ComponentsDto, compTwoHeaders: CompHeaderDto[])
   {
     var joinCriteria = new JoinCriteria({
       Id : id,
@@ -186,8 +186,8 @@ export class JoinComponent implements OnInit {
 
       ComponentTwoHeaders : compTwoHeaders,
       SelectedJoinType :this._joinModalDto.JoinType,
-      CompOneSelected : compOneSelected.Id,
-      CompOneDisplay : compOneSelected.Value
+      CompOneSelected: compOneSelected.colIdx,
+      CompOneDisplay : compOneSelected.colName
      
     });
 
@@ -220,17 +220,17 @@ export class JoinComponent implements OnInit {
     this.Close();
   }
 
-  private SetCompNames(row : RowTypeDto) : StrLookupDto[]
-  {
-    var headers : StrLookupDto[] = [];
-    row.cells.forEach(cell=>
-    {
-      var headerLkp = new StrLookupDto({ Id:cell.colIdx, Value:cell.cellValue})
-      headers.push(headerLkp);
-    })
+  //private SetCompNames(headers: CompHeaderDto[]) : StrLookupDto[]
+  //{
+  //  var headers : StrLookupDto[] = [];
+  //  row.cells.forEach(cell=>
+  //  {
+  //    var headerLkp = new StrLookupDto({ Id:cell.colIdx, Value:cell.cellValue})
+  //    headers.push(headerLkp);
+  //  })
     
-    return headers;
-  }
+  //  return headers;
+  //}
 
   public changeCompTwoWs($event: any) {
  

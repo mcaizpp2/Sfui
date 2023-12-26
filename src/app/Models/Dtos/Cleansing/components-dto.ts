@@ -1,6 +1,7 @@
 import { RowTypeDto } from "./row-type-dto";
 import { ColumnOptionsDto } from "./column-dtos";
 import { ComponentOptionsDto} from './component-options-dto';
+import { CompHeaderDto } from "./header-dto";
 
 export class ComponentsDto {
     
@@ -30,5 +31,6 @@ export class ComponentsDto {
 
     currentPage: number;
 
+    headers: CompHeaderDto[];
     constructor(values: Object = {}) {}
 }

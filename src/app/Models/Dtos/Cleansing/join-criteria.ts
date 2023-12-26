@@ -1,5 +1,5 @@
-
 import { StrLookupDto } from '../str-lookup-dto';
+import { CompHeaderDto } from "./header-dto";
 
 export class JoinCriteria {
 
@@ -13,7 +13,7 @@ export class JoinCriteria {
 
     CompTwoSelected : string;
 
-    CompTwoHeaders : StrLookupDto[];
+    CompTwoHeaders: CompHeaderDto[];
 
     CompOneColName : string;
     constructor(values: Object = {}) {
