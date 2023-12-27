@@ -479,6 +479,10 @@ constructor(private _cleansingBl : CleansingBl,
   public async Load(show : boolean = true)
   {
     var response = await this._cleansingBl.Load(this._cleanseMgrId, show, this._lstPagingRequests);
+
+    if (!response.status) {
+      return;
+    }
     var cleaned = response.cleanedDtos;
     cleaned.push(response.processed);
 
